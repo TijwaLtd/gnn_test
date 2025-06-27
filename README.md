@@ -19,7 +19,7 @@ Project license DFT_data/ \# Folder containing generated graphs and
 index.csv \<composition\>/\<structure\>/graphs.pt index.csv \# Generated
 by \`generate_index.py\`
 
-1\. DFT Processing & Graph Construction
+## 1\. DFT Processing & Graph Construction
 
 1\. bulk_export_all.py: Recursively finds all calculation folders under
 DFT_data/, reads VASP OUTCAR & CONTCAR (or POSCAR) to extract:  - Total
@@ -37,7 +37,7 @@ Gaussian kernels centered in \[0, cutoff\].  - Applies smooth cosine
 cutoff.  - Returns edge-level RBF features of shape \[num_edges,
 num_rbf\].
 
-2\. Dataset Indexing & Lazy Loading
+## 2\. Dataset Indexing & Lazy Loading
 
 1\. generate_index.py:  - Walks through DFT_data/ directory.  - Loads
 each graphs.pt with PyTorch (including custom PyG safe globals).  -
@@ -51,7 +51,7 @@ corresponding graphs.pt lazily.  - Attaches additional fields (n_B, n_C,
 composition, tag).  - Allows efficient batching via PyG DataLoader
 without preloading all graphs into memory.
 
-3\. Equivariant GNN Model (E₃NN)
+## 3\. Equivariant GNN Model (E₃NN)
 
 1\. e3nn_gnn_model.py:  - Imports from e3nn:  - o3.Irreps for
 irreducible representation specifications.  -
@@ -78,7 +78,7 @@ scalar/vector/tensor channels (e.g. 32x0e+16x1o+8x2e).  - max_l sets max
 spherical harmonic degree.  - num_layers layers of equivariant graph
 convolutions.
 
-4\. Training & Evaluation
+## 4\. Training & Evaluation
 
 1\. train.py:  - Loads LazyGraphDataset and wraps in DataLoader.  -
 Instantiates E3NNForceModel, moves to cuda if available.  - Defines
