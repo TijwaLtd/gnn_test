@@ -91,3 +91,47 @@ epochs:  - train_one_epoch(...)  - evaluate_model(...)  - Save best
 checkpoint (best_e3nn_model.pth).
 
 
+-------------
+##Approach
+
+A high-level outline of how graphs are constructed for the equivariant GNN:
+
+Node Construction
+
+Atoms as Nodes: Each atom in the POSCAR file becomes a node.
+
+Node Features:
+
+Atomic number (Z) encoded as an integer or one-hot vector.
+
+Optional learned embedding of element type.
+
+Initial scalar irreps projection via Irreps("16x0e").
+
+Edge Construction
+
+Periodic Neighbor Search: For each atom, neighbors are found within a cutoff radius (default 5 Å) using fractional coordinates and the lattice vectors, ensuring periodic boundary conditions.
+
+Edge Index: Collected as a COO-format pair of senders and receivers (edge_index) for PyG.
+
+Edge Attributes
+
+Radial Basis Expansion (RBF): Pairwise distances are expanded into a soft one-hot basis (20–50 bins) via soft_one_hot_linspace.
+
+Spherical Harmonics: Directional vectors between atoms are encoded into irreducible representations (o3.spherical_harmonics) to capture angular information.
+
+Concatenation: RBF features and spherical harmonics projections are concatenated into a single edge_attr tensor, then projected into equivariant irreps.
+
+Graph Data Object
+
+The final graph is represented as a torch_geometric.data.Data object containing:
+
+x (node features tensor),
+
+edge_index (2×E tensor),
+
+edge_attr (E×F tensor),
+
+Cell lattice & positions for potential on-the-fly augmentation.
+
+By following this pipeline, the model ingests rich geometric and chemical information in an SO(3)-equivariant manner, enabling accurate energy and force predictions.
