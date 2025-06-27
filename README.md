@@ -65,6 +65,13 @@ tensor products over edges.  - Gated activations keeping equivariance.
 graph-level energy.
      - Force prediction via gradient F = -∇ₓE.
      - HENCE THE MODEL PREDICTS ENERGY AND THEN COMPUTES F AS THE NEGATIVE GRADIENT OF ENERGY
+## In short:
+
+- First predict E.
+
+- Then compute F = –∇E using the predicted energy and the input positions.
+
+- Finally compare those forces to your original DFT forces to train/validate the model.
 
 2\. Key design choices:  - irreps_hidden controls numbers of
 scalar/vector/tensor channels (e.g. 32x0e+16x1o+8x2e).  - max_l sets max
