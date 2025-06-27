@@ -60,8 +60,11 @@ NormActivation for gated non-linearities.  - Builds an E3NNForceModel
 class:  - Edge features: RBF + Spherical Harmonics (via separate
 RBFExpansion & SphericalHarmonics).  - Message passing: Equivariant
 tensor products over edges.  - Gated activations keeping equivariance.
- - Output heads:  - Scalar energy prediction per node, summed to
-graph-level energy.  - Force prediction via gradient F = -∇ₓE.
+ - Output heads:
+    - Scalar energy prediction per node, summed to
+graph-level energy.
+     - Force prediction via gradient F = -∇ₓE.
+     - HENCE THE MODEL PREDICTS ENERGY AND THEN COMPUTES F AS THE NEGATIVE GRADIENT OF ENERGY
 
 2\. Key design choices:  - irreps_hidden controls numbers of
 scalar/vector/tensor channels (e.g. 32x0e+16x1o+8x2e).  - max_l sets max
@@ -80,9 +83,4 @@ early stopping.
 epochs:  - train_one_epoch(...)  - evaluate_model(...)  - Save best
 checkpoint (best_e3nn_model.pth).
 
-5\. Next Steps for E₃NN Specialist
 
-\- Hyperparameter tuning: adjust num_rbf, cutoff, irreps_hidden,
-num_layers, learning rate, λ. - Force-aware training: confirm stability
-by inspecting force MAE. - Extend model: incorporate multi-head
-attention, residual blocks, or deeper architectures.
