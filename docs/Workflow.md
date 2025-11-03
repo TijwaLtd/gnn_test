@@ -22,6 +22,7 @@ The project has been significantly refactored and improved to address the challe
 *   **Flexible Training**: The number of training epochs is no longer hardcoded. It can be easily set via the `--epochs` command-line argument.
 *   **Cleaner Model Saving**: The model saving strategy has been simplified. The script now saves only `best_model.pth` (for the best-performing model) and `latest_checkpoint.pt` (for resuming training), preventing directory clutter.
 *   **Enhanced Evaluation**: The evaluation script `src/evaluation/test_parity_2.py` now generates three separate parity plots: one for all data, one specifically for equilibrium structures (`forces_parity_EQ.png`), and one for non-equilibrium structures. This provides a clear and direct way to verify the fix for the equilibrium noise.
+*   **Robust Data Handling**: The model's `forward` method and evaluation scripts now consistently use `torch_geometric.loader.DataLoader` for efficient batch processing of graph data, ensuring consistent data presentation and improved performance. The model's internal calculations for periodic boundary conditions have been refined to correctly handle lattice information.
 
 ---
 
@@ -72,15 +73,13 @@ The script will save `best_model.pth` and `latest_checkpoint.pt` in the `models/
 
 After training is complete, you can evaluate your best model.
 
-1.  **Edit the config:** Open `src/evaluation/test_parity_2.py` and ensure the `model_path` in the `CONFIG` dictionary points to your trained model (it should point to `models/best_model.pth`).
-
-2.  **Run the script:**
+1.  **Run the script:** The evaluation script automatically loads the `best_model.pth` and processes data in batches.
 
     ```bash
     python src/evaluation/test_parity_2.py
     ```
 
-3.  **Check the results:** The output plots will be saved in the `parity_plots/` directory. Pay special attention to `forces_parity_EQ.png` to confirm that the noise at equilibrium has been reduced.
+2.  **Check the results:** The output plots will be saved in the `parity_plots/` directory. Pay special attention to `forces_parity_EQ.png` to confirm that the noise at equilibrium has been reduced.
 
 ---
 
