@@ -98,7 +98,7 @@ After training is complete, you can evaluate your best model using the `src/eval
 
     ```bash
     # Example: Generate all plots while using the expandable segments memory configuration
-    python src/evaluation/test_parity_2.py --gen-all-plots --use-expandable-segments
+    python src/evaluation/test_parity_2.py --use-expandable-segments
     ```
 
 4.  **Check the results:** The output plots will be saved in the `parity_plots/` directory. Pay special attention to `forces_parity_EQ.png` (when generated) to confirm that the noise at equilibrium has been reduced.
