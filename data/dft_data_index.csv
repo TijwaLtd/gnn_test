@@ -1,0 +1,28 @@
+graph_path,is_eq,n_B,n_C,n_atoms,composition,tag
+Test_Data/Test16/graphs.pt,0,13,2,15,B13C2,Test16
+Test_Data/Test11/graphs.pt,0,45,15,60,B45C15,Test11
+Test_Data/Test18/graphs.pt,0,113,7,120,B113C7,Test18
+Test_Data/Test19/graphs.pt,0,12,3,15,B12C3,Test19
+Test_Data/Test10/graphs.pt,0,27,3,30,B27C3,Test10
+Test_Data/Test17/graphs.pt,0,13,2,15,B13C2,Test17
+Test_Data/Test1/graphs.pt,0,12,3,15,B12C3,Test1
+Test_Data/Test12/graphs.pt,0,12,3,15,B12C3,Test12
+Test_Data/Test15/graphs.pt,0,13,2,15,B13C2,Test15
+Test_Data/Test100/graphs.pt,0,105,15,120,B105C15,Test100
+Test_Data/Test14/graphs.pt,0,12,3,15,B12C3,Test14
+Test_Data/Test13/graphs.pt,0,51,9,60,B51C9,Test13
+Test_Data/Test2/graphs.pt,0,11,4,15,B11C4,Test2
+60 atoms/S_110819/graphs.pt,0,45,15,60,B45C15,S_110819
+60 atoms/S_106138/graphs.pt,0,45,15,60,B45C15,S_106138
+60 atoms/S_136279/graphs.pt,0,45,15,60,B45C15,S_136279
+30 atoms/S_116406/graphs.pt,0,23,7,30,B23C7,S_116406
+30 atoms/S_12392/graphs.pt,0,23,7,30,B23C7,S_12392
+30 atoms/S_137456/graphs.pt,0,23,7,30,B23C7,S_137456
+30 atoms/S_146902/graphs.pt,0,23,7,30,B23C7,S_146902
+15 atoms/S_269328/graphs.pt,0,11,4,15,B11C4,S_269328
+15 atoms/S_255687/graphs.pt,0,11,4,15,B11C4,S_255687
+15 atoms/S_207148/graphs.pt,0,11,4,15,B11C4,S_207148
+15 atoms/S_23543/graphs.pt,0,11,4,15,B11C4,S_23543
+15 atoms/S_138297/graphs.pt,0,11,4,15,B11C4,S_138297
+120 atoms/S_123727/graphs.pt,0,101,19,120,B101C19,S_123727
+120 atoms/S_116579/graphs.pt,0,101,19,120,B101C19,S_116579

@@ -1,0 +1,851 @@
+Using device: cpu
+Total parameters: 853,520
+Trainable parameters: 853,520
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/e3nn_gnn_model.py", line 670, in <module>
+    train_ds = LazyGraphDataset(index_csv=r"C:\Users\labadmin\Documents\GNN\GNN-ML-Model\index_train.csv", root_dir = ROOT)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/lazy_graph_dataset.py", line 16, in __init__
+    self.df = pd.read_csv(index_csv)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\labadmin\\Documents\\GNN\\GNN-ML-Model\\index_train.csv'
+Using device: cpu
+Total parameters: 853,520
+Trainable parameters: 853,520
+Using λ_force = 15.000
+
+Eval ▶ Total Loss 1.5312  |  E_MSE 1.1895  |  F_MSE 0.3418
+     ▶ Energy   RMSE 1.0906,  MAE 0.9674
+     ▶ Forces   RMSE 0.5810,  MAE 0.4323
+
+     ▶ EQ: mean |F| = 9.0354e-01 eV/Å,  % atoms ≤ τ(0.1) = 1.5%
+
+Train Metrics 001 | Train: total=28.0758 E=15.6499 F=0.8168 EQpen=0.2897 | Val: total=1.5312 E=1.1895 F=0.3418 | λ_eq=0.60, τ=0.10
+Epoch   1 | Train: 28.075828 (E: 15.649910, F: 0.816806), EQ: 0.289707 | Val: 1.531223 (E: 1.189468, F: 0.341755)
+[ckpt] improved best → 1.531223; saved models/best_e3nn_model_val_1.531223_epoch_0001.pt + best_e3nn_weights_val_1.531223_epoch_0001.pth
+
+Eval ▶ Total Loss 0.4852  |  E_MSE 0.1763  |  F_MSE 0.3089
+     ▶ Energy   RMSE 0.4199,  MAE 0.3901
+     ▶ Forces   RMSE 0.5313,  MAE 0.4017
+
+     ▶ EQ: mean |F| = 9.4176e-01 eV/Å,  % atoms ≤ τ(0.1) = 0.7%
+
+Train Metrics 002 | Train: total=8.8561 E=4.1666 F=0.3060 EQpen=0.1646 | Val: total=0.4852 E=0.1763 F=0.3089 | λ_eq=0.60, τ=0.10
+Epoch   2 | Train: 8.856085 (E: 4.166604, F: 0.306050), EQ: 0.164557 | Val: 0.485224 (E: 0.176348, F: 0.308876)
+[ckpt] improved best → 0.485224; saved models/best_e3nn_model_val_0.485224_epoch_0002.pt + best_e3nn_weights_val_0.485224_epoch_0002.pth
+
+Eval ▶ Total Loss 0.7188  |  E_MSE 0.5330  |  F_MSE 0.1858
+     ▶ Energy   RMSE 0.7301,  MAE 0.6050
+     ▶ Forces   RMSE 0.4160,  MAE 0.3140
+
+     ▶ EQ: mean |F| = 8.3774e-01 eV/Å,  % atoms ≤ τ(0.1) = 2.2%
+
+Train Metrics 003 | Train: total=6.9571 E=3.5986 F=0.2170 EQpen=0.1736 | Val: total=0.7188 E=0.5330 F=0.1858 | λ_eq=0.60, τ=0.10
+Epoch   3 | Train: 6.957142 (E: 3.598646, F: 0.216956), EQ: 0.173594 | Val: 0.718813 (E: 0.533038, F: 0.185775)
+
+Eval ▶ Total Loss 0.6425  |  E_MSE 0.4220  |  F_MSE 0.2205
+     ▶ Energy   RMSE 0.6496,  MAE 0.5405
+     ▶ Forces   RMSE 0.4849,  MAE 0.3444
+
+     ▶ EQ: mean |F| = 7.2061e-01 eV/Å,  % atoms ≤ τ(0.1) = 0.0%
+
+Train Metrics 004 | Train: total=9.7412 E=6.6188 F=0.2010 EQpen=0.1784 | Val: total=0.6425 E=0.4220 F=0.2205 | λ_eq=0.60, τ=0.10
+Epoch   4 | Train: 9.741158 (E: 6.618758, F: 0.201023), EQ: 0.178435 | Val: 0.642507 (E: 0.421992, F: 0.220515)
+
+Eval ▶ Total Loss 0.5145  |  E_MSE 0.1271  |  F_MSE 0.3874
+     ▶ Energy   RMSE 0.3565,  MAE 0.2898
+     ▶ Forces   RMSE 0.5962,  MAE 0.4594
+
+     ▶ EQ: mean |F| = 9.0592e-01 eV/Å,  % atoms ≤ τ(0.1) = 0.7%
+
+Train Metrics 005 | Train: total=6.9698 E=3.9032 F=0.1970 EQpen=0.1870 | Val: total=0.5145 E=0.1271 F=0.3874 | λ_eq=0.60, τ=0.10
+Epoch   5 | Train: 6.969768 (E: 3.903233, F: 0.196955), EQ: 0.187023 | Val: 0.514499 (E: 0.127087, F: 0.387412)
+
+Eval ▶ Total Loss 0.4678  |  E_MSE 0.2838  |  F_MSE 0.1840
+     ▶ Energy   RMSE 0.5327,  MAE 0.4647
+     ▶ Forces   RMSE 0.4436,  MAE 0.3252
+
+     ▶ EQ: mean |F| = 8.0849e-01 eV/Å,  % atoms ≤ τ(0.1) = 3.0%
+
+Train Metrics 006 | Train: total=4.4009 E=1.5409 F=0.1830 EQpen=0.1914 | Val: total=0.4678 E=0.2838 F=0.1840 | λ_eq=0.60, τ=0.10
+Epoch   6 | Train: 4.400950 (E: 1.540908, F: 0.183012), EQ: 0.191428 | Val: 0.467775 (E: 0.283818, F: 0.183956)
+[ckpt] improved best → 0.467775; saved models/best_e3nn_model_val_0.467775_epoch_0006.pt + best_e3nn_weights_val_0.467775_epoch_0006.pth
+
+Eval ▶ Total Loss 1.2832  |  E_MSE 1.0458  |  F_MSE 0.2375
+     ▶ Energy   RMSE 1.0226,  MAE 0.9975
+     ▶ Forces   RMSE 0.5036,  MAE 0.3780
+
+     ▶ EQ: mean |F| = 7.8727e-01 eV/Å,  % atoms ≤ τ(0.1) = 2.2%
+
+Train Metrics 007 | Train: total=3.6818 E=1.3287 F=0.1489 EQpen=0.1986 | Val: total=1.2832 E=1.0458 F=0.2375 | λ_eq=0.60, τ=0.10
+Epoch   7 | Train: 3.681825 (E: 1.328712, F: 0.148932), EQ: 0.198566 | Val: 1.283205 (E: 1.045752, F: 0.237453)
+
+Eval ▶ Total Loss 0.2373  |  E_MSE 0.0798  |  F_MSE 0.1575
+     ▶ Energy   RMSE 0.2824,  MAE 0.2738
+     ▶ Forces   RMSE 0.4269,  MAE 0.2919
+
+     ▶ EQ: mean |F| = 6.8461e-01 eV/Å,  % atoms ≤ τ(0.1) = 3.7%
+
+Train Metrics 008 | Train: total=3.6422 E=1.6027 F=0.1286 EQpen=0.1840 | Val: total=0.2373 E=0.0798 F=0.1575 | λ_eq=0.60, τ=0.10
+Epoch   8 | Train: 3.642237 (E: 1.602670, F: 0.128611), EQ: 0.184004 | Val: 0.237279 (E: 0.079778, F: 0.157501)
+[ckpt] improved best → 0.237279; saved models/best_e3nn_model_val_0.237279_epoch_0008.pt + best_e3nn_weights_val_0.237279_epoch_0008.pth
+
+Eval ▶ Total Loss 0.3203  |  E_MSE 0.1627  |  F_MSE 0.1576
+     ▶ Energy   RMSE 0.4033,  MAE 0.3348
+     ▶ Forces   RMSE 0.4107,  MAE 0.3037
+
+     ▶ EQ: mean |F| = 7.1717e-01 eV/Å,  % atoms ≤ τ(0.1) = 1.5%
+
+Train Metrics 009 | Train: total=3.7261 E=1.7683 F=0.1232 EQpen=0.1825 | Val: total=0.3203 E=0.1627 F=0.1576 | λ_eq=0.60, τ=0.10
+Epoch   9 | Train: 3.726064 (E: 1.768261, F: 0.123222), EQ: 0.182453 | Val: 0.320291 (E: 0.162682, F: 0.157609)
+
+Eval ▶ Total Loss 0.3777  |  E_MSE 0.2097  |  F_MSE 0.1680
+     ▶ Energy   RMSE 0.4580,  MAE 0.4045
+     ▶ Forces   RMSE 0.4217,  MAE 0.3287
+
+     ▶ EQ: mean |F| = 9.4556e-01 eV/Å,  % atoms ≤ τ(0.1) = 0.7%
+
+Train Metrics 010 | Train: total=2.6941 E=1.0030 F=0.1057 EQpen=0.1749 | Val: total=0.3777 E=0.2097 F=0.1680 | λ_eq=0.60, τ=0.10
+Epoch  10 | Train: 2.694057 (E: 1.002969, F: 0.105745), EQ: 0.174858 | Val: 0.377749 (E: 0.209742, F: 0.168008)
+
+Eval ▶ Total Loss 0.4003  |  E_MSE 0.2507  |  F_MSE 0.1496
+     ▶ Energy   RMSE 0.5007,  MAE 0.4633
+     ▶ Forces   RMSE 0.3861,  MAE 0.2799
+
+     ▶ EQ: mean |F| = 7.4351e-01 eV/Å,  % atoms ≤ τ(0.1) = 0.7%
+
+Train Metrics 011 | Train: total=3.2439 E=1.5445 F=0.1060 EQpen=0.1828 | Val: total=0.4003 E=0.2507 F=0.1496 | λ_eq=0.60, τ=0.10
+Epoch  11 | Train: 3.243853 (E: 1.544504, F: 0.105977), EQ: 0.182823 | Val: 0.400307 (E: 0.250733, F: 0.149574)
+
+Eval ▶ Total Loss 0.7088  |  E_MSE 0.5521  |  F_MSE 0.1568
+     ▶ Energy   RMSE 0.7430,  MAE 0.7166
+     ▶ Forces   RMSE 0.4029,  MAE 0.3012
+
+     ▶ EQ: mean |F| = 8.6802e-01 eV/Å,  % atoms ≤ τ(0.1) = 1.5%
+
+Train Metrics 012 | Train: total=2.5135 E=1.0154 F=0.0927 EQpen=0.1798 | Val: total=0.7088 E=0.5521 F=0.1568 | λ_eq=0.60, τ=0.10
+Epoch  12 | Train: 2.513525 (E: 1.015368, F: 0.092686), EQ: 0.179767 | Val: 0.708837 (E: 0.552060, F: 0.156777)
+
+Eval ▶ Total Loss 0.4102  |  E_MSE 0.2605  |  F_MSE 0.1497
+     ▶ Energy   RMSE 0.5104,  MAE 0.4476
+     ▶ Forces   RMSE 0.3902,  MAE 0.3007
+
+     ▶ EQ: mean |F| = 7.9412e-01 eV/Å,  % atoms ≤ τ(0.1) = 3.0%
+
+Train Metrics 013 | Train: total=2.6139 E=1.1829 F=0.0882 EQpen=0.1795 | Val: total=0.4102 E=0.2605 F=0.1497 | λ_eq=0.60, τ=0.10
+Epoch  13 | Train: 2.613893 (E: 1.182867, F: 0.088222), EQ: 0.179483 | Val: 0.410169 (E: 0.260458, F: 0.149711)
+
+Eval ▶ Total Loss 0.6280  |  E_MSE 0.4812  |  F_MSE 0.1469
+     ▶ Energy   RMSE 0.6937,  MAE 0.6670
+     ▶ Forces   RMSE 0.3869,  MAE 0.2809
+
+     ▶ EQ: mean |F| = 7.8162e-01 eV/Å,  % atoms ≤ τ(0.1) = 0.7%
+
+Train Metrics 014 | Train: total=2.1705 E=0.8354 F=0.0820 EQpen=0.1756 | Val: total=0.6280 E=0.4812 F=0.1469 | λ_eq=0.60, τ=0.10
+Epoch  14 | Train: 2.170472 (E: 0.835363, F: 0.081982), EQ: 0.175637 | Val: 0.628030 (E: 0.481159, F: 0.146871)
+
+Eval ▶ Total Loss 0.1834  |  E_MSE 0.0634  |  F_MSE 0.1200
+     ▶ Energy   RMSE 0.2518,  MAE 0.2059
+     ▶ Forces   RMSE 0.3630,  MAE 0.2574
+
+     ▶ EQ: mean |F| = 7.0934e-01 eV/Å,  % atoms ≤ τ(0.1) = 1.5%
+
+Train Metrics 015 | Train: total=2.1038 E=1.0163 F=0.0658 EQpen=0.1673 | Val: total=0.1834 E=0.0634 F=0.1200 | λ_eq=0.60, τ=0.10
+Epoch  15 | Train: 2.103784 (E: 1.016329, F: 0.065805), EQ: 0.167291 | Val: 0.183399 (E: 0.063412, F: 0.119987)
+[ckpt] improved best → 0.183399; saved models/best_e3nn_model_val_0.183399_epoch_0015.pt + best_e3nn_weights_val_0.183399_epoch_0015.pth
+
+Eval ▶ Total Loss 1.3670  |  E_MSE 1.2391  |  F_MSE 0.1280
+     ▶ Energy   RMSE 1.1131,  MAE 1.0906
+     ▶ Forces   RMSE 0.3679,  MAE 0.2762
+
+     ▶ EQ: mean |F| = 8.0937e-01 eV/Å,  % atoms ≤ τ(0.1) = 1.5%
+
+Train Metrics 016 | Train: total=2.5510 E=1.4207 F=0.0682 EQpen=0.1795 | Val: total=1.3670 E=1.2391 F=0.1280 | λ_eq=0.60, τ=0.10
+Epoch  16 | Train: 2.550978 (E: 1.420698, F: 0.068173), EQ: 0.179480 | Val: 1.367041 (E: 1.239074, F: 0.127968)
+
+Eval ▶ Total Loss 0.1518  |  E_MSE 0.0193  |  F_MSE 0.1324
+     ▶ Energy   RMSE 0.1390,  MAE 0.1187
+     ▶ Forces   RMSE 0.3662,  MAE 0.2655
+
+     ▶ EQ: mean |F| = 7.7311e-01 eV/Å,  % atoms ≤ τ(0.1) = 1.5%
+
+Train Metrics 017 | Train: total=1.7157 E=0.4584 F=0.0764 EQpen=0.1844 | Val: total=0.1518 E=0.0193 F=0.1324 | λ_eq=0.60, τ=0.10
+Epoch  17 | Train: 1.715677 (E: 0.458448, F: 0.076439), EQ: 0.184411 | Val: 0.151761 (E: 0.019316, F: 0.132446)
+[ckpt] improved best → 0.151761; saved models/best_e3nn_model_val_0.151761_epoch_0017.pt + best_e3nn_weights_val_0.151761_epoch_0017.pth
+
+Eval ▶ Total Loss 1.5314  |  E_MSE 1.4180  |  F_MSE 0.1134
+     ▶ Energy   RMSE 1.1908,  MAE 1.1831
+     ▶ Forces   RMSE 0.3494,  MAE 0.2557
+
+     ▶ EQ: mean |F| = 7.3680e-01 eV/Å,  % atoms ≤ τ(0.1) = 1.5%
+
+Train Metrics 018 | Train: total=1.8157 E=0.6742 F=0.0688 EQpen=0.1816 | Val: total=1.5314 E=1.4180 F=0.1134 | λ_eq=0.60, τ=0.10
+Epoch  18 | Train: 1.815696 (E: 0.674221, F: 0.068833), EQ: 0.181635 | Val: 1.531400 (E: 1.417957, F: 0.113443)
+
+Eval ▶ Total Loss 2.3505  |  E_MSE 2.2272  |  F_MSE 0.1233
+     ▶ Energy   RMSE 1.4924,  MAE 1.4893
+     ▶ Forces   RMSE 0.3673,  MAE 0.2747
+
+     ▶ EQ: mean |F| = 7.5383e-01 eV/Å,  % atoms ≤ τ(0.1) = 0.7%
+
+Train Metrics 019 | Train: total=2.1183 E=0.8909 F=0.0741 EQpen=0.1929 | Val: total=2.3505 E=2.2272 F=0.1233 | λ_eq=0.60, τ=0.10
+Epoch  19 | Train: 2.118342 (E: 0.890887, F: 0.074113), EQ: 0.192922 | Val: 2.350512 (E: 2.227220, F: 0.123292)
+
+Eval ▶ Total Loss 0.1697  |  E_MSE 0.0502  |  F_MSE 0.1195
+     ▶ Energy   RMSE 0.2240,  MAE 0.1808
+     ▶ Forces   RMSE 0.3569,  MAE 0.2614
+
+     ▶ EQ: mean |F| = 7.8015e-01 eV/Å,  % atoms ≤ τ(0.1) = 2.2%
+
+Train Metrics 020 | Train: total=1.9921 E=0.9600 F=0.0617 EQpen=0.1767 | Val: total=0.1697 E=0.0502 F=0.1195 | λ_eq=0.60, τ=0.10
+Epoch  20 | Train: 1.992117 (E: 0.959959, F: 0.061741), EQ: 0.176747 | Val: 0.169680 (E: 0.050175, F: 0.119505)
+
+Eval ▶ Total Loss 0.2373  |  E_MSE 0.1282  |  F_MSE 0.1091
+     ▶ Energy   RMSE 0.3581,  MAE 0.3420
+     ▶ Forces   RMSE 0.3427,  MAE 0.2522
+
+     ▶ EQ: mean |F| = 7.9068e-01 eV/Å,  % atoms ≤ τ(0.1) = 2.2%
+
+Train Metrics 021 | Train: total=1.3924 E=0.3539 F=0.0621 EQpen=0.1793 | Val: total=0.2373 E=0.1282 F=0.1091 | λ_eq=0.60, τ=0.10
+Epoch  21 | Train: 1.392388 (E: 0.353920, F: 0.062057), EQ: 0.179347 | Val: 0.237340 (E: 0.128224, F: 0.109116)
+
+Eval ▶ Total Loss 0.5256  |  E_MSE 0.4010  |  F_MSE 0.1246
+     ▶ Energy   RMSE 0.6332,  MAE 0.6232
+     ▶ Forces   RMSE 0.3678,  MAE 0.2688
+
+     ▶ EQ: mean |F| = 7.1716e-01 eV/Å,  % atoms ≤ τ(0.1) = 4.4%
+
+Train Metrics 022 | Train: total=1.6662 E=0.6581 F=0.0597 EQpen=0.1864 | Val: total=0.5256 E=0.4010 F=0.1246 | λ_eq=0.60, τ=0.10
+Epoch  22 | Train: 1.666191 (E: 0.658145, F: 0.059749), EQ: 0.186359 | Val: 0.525564 (E: 0.401001, F: 0.124563)
+
+Eval ▶ Total Loss 0.2795  |  E_MSE 0.1858  |  F_MSE 0.0937
+     ▶ Energy   RMSE 0.4311,  MAE 0.4164
+     ▶ Forces   RMSE 0.3175,  MAE 0.2265
+
+     ▶ EQ: mean |F| = 7.2766e-01 eV/Å,  % atoms ≤ τ(0.1) = 3.0%
+
+Train Metrics 023 | Train: total=1.4036 E=0.5222 F=0.0517 EQpen=0.1763 | Val: total=0.2795 E=0.1858 F=0.0937 | λ_eq=0.60, τ=0.10
+Epoch  23 | Train: 1.403631 (E: 0.522185, F: 0.051712), EQ: 0.176264 | Val: 0.279533 (E: 0.185849, F: 0.093684)
+
+Eval ▶ Total Loss 1.1242  |  E_MSE 1.0070  |  F_MSE 0.1172
+     ▶ Energy   RMSE 1.0035,  MAE 0.9791
+     ▶ Forces   RMSE 0.3505,  MAE 0.2713
+
+     ▶ EQ: mean |F| = 8.7110e-01 eV/Å,  % atoms ≤ τ(0.1) = 1.5%
+
+Train Metrics 024 | Train: total=1.5875 E=0.6345 F=0.0564 EQpen=0.1772 | Val: total=1.1242 E=1.0070 F=0.1172 | λ_eq=0.60, τ=0.10
+Epoch  24 | Train: 1.587473 (E: 0.634478, F: 0.056447), EQ: 0.177158 | Val: 1.124183 (E: 1.006959, F: 0.117224)
+
+Eval ▶ Total Loss 0.1291  |  E_MSE 0.0308  |  F_MSE 0.0984
+     ▶ Energy   RMSE 0.1754,  MAE 0.1294
+     ▶ Forces   RMSE 0.3318,  MAE 0.2409
+
+     ▶ EQ: mean |F| = 7.4761e-01 eV/Å,  % atoms ≤ τ(0.1) = 3.7%
+
+Train Metrics 025 | Train: total=1.2991 E=0.4294 F=0.0510 EQpen=0.1751 | Val: total=0.1291 E=0.0308 F=0.0984 | λ_eq=0.60, τ=0.10
+Epoch  25 | Train: 1.299140 (E: 0.429443, F: 0.050976), EQ: 0.175088 | Val: 0.129123 (E: 0.030764, F: 0.098358)
+[ckpt] improved best → 0.129123; saved models/best_e3nn_model_val_0.129123_epoch_0025.pt + best_e3nn_weights_val_0.129123_epoch_0025.pth
+
+Eval ▶ Total Loss 0.4542  |  E_MSE 0.3372  |  F_MSE 0.1170
+     ▶ Energy   RMSE 0.5807,  MAE 0.5727
+     ▶ Forces   RMSE 0.3645,  MAE 0.2730
+
+     ▶ EQ: mean |F| = 7.3679e-01 eV/Å,  % atoms ≤ τ(0.1) = 1.5%
+
+Train Metrics 026 | Train: total=1.1043 E=0.2604 F=0.0491 EQpen=0.1801 | Val: total=0.4542 E=0.3372 F=0.1170 | λ_eq=0.60, τ=0.10
+Epoch  26 | Train: 1.104300 (E: 0.260405, F: 0.049054), EQ: 0.180142 | Val: 0.454180 (E: 0.337218, F: 0.116962)
+
+Eval ▶ Total Loss 0.1595  |  E_MSE 0.0560  |  F_MSE 0.1035
+     ▶ Energy   RMSE 0.2366,  MAE 0.2078
+     ▶ Forces   RMSE 0.3244,  MAE 0.2468
+
+     ▶ EQ: mean |F| = 7.9417e-01 eV/Å,  % atoms ≤ τ(0.1) = 3.0%
+
+Train Metrics 027 | Train: total=1.1398 E=0.2600 F=0.0513 EQpen=0.1843 | Val: total=0.1595 E=0.0560 F=0.1035 | λ_eq=0.60, τ=0.10
+Epoch  27 | Train: 1.139758 (E: 0.260044, F: 0.051277), EQ: 0.184278 | Val: 0.159482 (E: 0.055962, F: 0.103520)
+
+Eval ▶ Total Loss 0.4236  |  E_MSE 0.3170  |  F_MSE 0.1066
+     ▶ Energy   RMSE 0.5630,  MAE 0.5437
+     ▶ Forces   RMSE 0.3261,  MAE 0.2475
+
+     ▶ EQ: mean |F| = 8.2830e-01 eV/Å,  % atoms ≤ τ(0.1) = 1.5%
+
+Train Metrics 028 | Train: total=1.1817 E=0.4234 F=0.0435 EQpen=0.1758 | Val: total=0.4236 E=0.3170 F=0.1066 | λ_eq=0.60, τ=0.10
+Epoch  28 | Train: 1.181668 (E: 0.423433, F: 0.043518), EQ: 0.175772 | Val: 0.423594 (E: 0.316961, F: 0.106633)
+
+Eval ▶ Total Loss 0.1273  |  E_MSE 0.0203  |  F_MSE 0.1070
+     ▶ Energy   RMSE 0.1424,  MAE 0.1276
+     ▶ Forces   RMSE 0.3229,  MAE 0.2345
+
+     ▶ EQ: mean |F| = 8.0158e-01 eV/Å,  % atoms ≤ τ(0.1) = 3.0%
+
+Train Metrics 029 | Train: total=1.0281 E=0.3175 F=0.0403 EQpen=0.1768 | Val: total=0.1273 E=0.0203 F=0.1070 | λ_eq=0.60, τ=0.10
+Epoch  29 | Train: 1.028079 (E: 0.317465, F: 0.040300), EQ: 0.176846 | Val: 0.127314 (E: 0.020286, F: 0.107028)
+[ckpt] improved best → 0.127314; saved models/best_e3nn_model_val_0.127314_epoch_0029.pt + best_e3nn_weights_val_0.127314_epoch_0029.pth
+
+Eval ▶ Total Loss 0.1726  |  E_MSE 0.0684  |  F_MSE 0.1041
+     ▶ Energy   RMSE 0.2616,  MAE 0.2437
+     ▶ Forces   RMSE 0.3386,  MAE 0.2601
+
+     ▶ EQ: mean |F| = 8.0622e-01 eV/Å,  % atoms ≤ τ(0.1) = 2.2%
+
+Train Metrics 030 | Train: total=1.0177 E=0.1609 F=0.0498 EQpen=0.1832 | Val: total=0.1726 E=0.0684 F=0.1041 | λ_eq=0.60, τ=0.10
+Epoch  30 | Train: 1.017672 (E: 0.160896, F: 0.049789), EQ: 0.183235 | Val: 0.172591 (E: 0.068442, F: 0.104149)
+
+Eval ▶ Total Loss 0.2473  |  E_MSE 0.1448  |  F_MSE 0.1025
+     ▶ Energy   RMSE 0.3805,  MAE 0.3604
+     ▶ Forces   RMSE 0.3333,  MAE 0.2473
+
+     ▶ EQ: mean |F| = 7.8815e-01 eV/Å,  % atoms ≤ τ(0.1) = 4.4%
+
+Train Metrics 031 | Train: total=1.2052 E=0.3639 F=0.0491 EQpen=0.1735 | Val: total=0.2473 E=0.1448 F=0.1025 | λ_eq=0.60, τ=0.10
+Epoch  31 | Train: 1.205219 (E: 0.363897, F: 0.049146), EQ: 0.173545 | Val: 0.247324 (E: 0.144792, F: 0.102532)
+
+Eval ▶ Total Loss 0.2907  |  E_MSE 0.2004  |  F_MSE 0.0903
+     ▶ Energy   RMSE 0.4476,  MAE 0.4308
+     ▶ Forces   RMSE 0.3256,  MAE 0.2570
+
+     ▶ EQ: mean |F| = 8.2551e-01 eV/Å,  % atoms ≤ τ(0.1) = 2.2%
+
+Train Metrics 032 | Train: total=1.0231 E=0.3251 F=0.0394 EQpen=0.1772 | Val: total=0.2907 E=0.2004 F=0.0903 | λ_eq=0.60, τ=0.10
+Epoch  32 | Train: 1.023103 (E: 0.325130, F: 0.039442), EQ: 0.177230 | Val: 0.290701 (E: 0.200378, F: 0.090323)
+
+Eval ▶ Total Loss 0.2770  |  E_MSE 0.1707  |  F_MSE 0.1063
+     ▶ Energy   RMSE 0.4132,  MAE 0.3976
+     ▶ Forces   RMSE 0.3248,  MAE 0.2409
+
+     ▶ EQ: mean |F| = 7.9036e-01 eV/Å,  % atoms ≤ τ(0.1) = 3.0%
+
+Train Metrics 033 | Train: total=0.8794 E=0.2166 F=0.0371 EQpen=0.1761 | Val: total=0.2770 E=0.1707 F=0.1063 | λ_eq=0.60, τ=0.10
+Epoch  33 | Train: 0.879364 (E: 0.216608, F: 0.037140), EQ: 0.176096 | Val: 0.277028 (E: 0.170707, F: 0.106321)
+
+Eval ▶ Total Loss 0.2466  |  E_MSE 0.1495  |  F_MSE 0.0971
+     ▶ Energy   RMSE 0.3866,  MAE 0.3507
+     ▶ Forces   RMSE 0.3185,  MAE 0.2372
+
+     ▶ EQ: mean |F| = 7.4617e-01 eV/Å,  % atoms ≤ τ(0.1) = 3.0%
+
+Train Metrics 034 | Train: total=1.0617 E=0.2840 F=0.0446 EQpen=0.1810 | Val: total=0.2466 E=0.1495 F=0.0971 | λ_eq=0.60, τ=0.10
+Epoch  34 | Train: 1.061702 (E: 0.284003, F: 0.044607), EQ: 0.180988 | Val: 0.246581 (E: 0.149465, F: 0.097116)
+
+Eval ▶ Total Loss 0.1264  |  E_MSE 0.0415  |  F_MSE 0.0849
+     ▶ Energy   RMSE 0.2037,  MAE 0.1728
+     ▶ Forces   RMSE 0.3055,  MAE 0.2297
+
+     ▶ EQ: mean |F| = 7.6531e-01 eV/Å,  % atoms ≤ τ(0.1) = 7.4%
+
+Train Metrics 035 | Train: total=1.1968 E=0.6330 F=0.0306 EQpen=0.1738 | Val: total=0.1264 E=0.0415 F=0.0849 | λ_eq=0.60, τ=0.10
+Epoch  35 | Train: 1.196761 (E: 0.632985, F: 0.030634), EQ: 0.173767 | Val: 0.126449 (E: 0.041507, F: 0.084942)
+[ckpt] improved best → 0.126449; saved models/best_e3nn_model_val_0.126449_epoch_0035.pt + best_e3nn_weights_val_0.126449_epoch_0035.pth
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/e3nn_gnn_model.py", line 701, in <module>
+    train_loss, train_energy_loss, train_force_loss, train_eq_loss = train_one_epoch(model, train_loader, loss_fn, optimizer, device, lambda_forces= lambda_forces, lambda_eq = lambda_eq, tau = tau)
+                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/e3nn_gnn_model.py", line 501, in train_one_epoch
+    total_batch_loss.backward()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/_tensor.py", line 522, in backward
+    torch.autograd.backward(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/autograd/__init__.py", line 266, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+Using device: cpu
+Training for 5 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 8 EQ structures (weight=0.1250), 22 NEQ structures (weight=0.0455)
+λ_force schedule: start=0.100, end=13.500, warmup=100 epochs
+
+Eval ▶ Energy RMSE: 0.8835 | Force RMSE: 0.7679
+Train Metrics 001 | λ_F=0.234 | Train: total=11.6458 E=11.5768 F=0.2951 | Val: total=1.3702 E=0.7805 F=0.5897
+[ckpt] improved best → 1.370153; saved models/best_e3nn_model_val_1.370153_epoch_0001.pt + best_e3nn_weights_val_1.370153_epoch_0001.pth
+Using device: cpu
+Training for 3 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 8 EQ structures (weight=0.1250), 22 NEQ structures (weight=0.0455)
+λ_force schedule: start=0.100, end=15.333, warmup=100 epochs
+
+Eval ▶ Energy RMSE: 1.8568 | Force RMSE: 0.7258
+Train Metrics 001 | λ_F=0.252 | Train: total=77.5353 E=77.3477 F=0.7432 | Val: total=3.9747 E=3.4479 F=0.5268
+[ckpt] New best model found! Saved to models/best_model.pth (val_loss: 3.974702)
+
+Eval ▶ Energy RMSE: 0.3906 | Force RMSE: 0.7045
+Train Metrics 002 | λ_F=0.405 | Train: total=2.7997 E=2.5483 F=0.6214 | Val: total=0.6489 E=0.1526 F=0.4963
+[ckpt] New best model found! Saved to models/best_model.pth (val_loss: 0.648939)
+
+Eval ▶ Energy RMSE: 0.8554 | Force RMSE: 0.5476
+Train Metrics 003 | λ_F=0.557 | Train: total=1.5986 E=1.4415 F=0.2820 | Val: total=1.0316 E=0.7318 F=0.2998
+[dump] Saved energy and force data at epoch 3
+Using device: cpu
+Found 7 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+[saved] parity_plots/forces_parity_sample0_Test1.png  |  MAE=0.695189 RMSE=0.848892 R²=-65656.455472
+[saved] parity_plots/forces_parity_sample1_Test12.png  |  MAE=0.419459 RMSE=0.512379 R²=-18159.572881
+[saved] parity_plots/forces_parity_sample2_Test19.png  |  MAE=0.301075 RMSE=0.398130 R²=-3463.040335
+[saved] parity_plots/forces_parity_sample3_Test14.png  |  MAE=0.475439 RMSE=0.607884 R²=-10773.354042
+[saved] parity_plots/forces_parity_sample4_S_146902.png  |  MAE=0.891138 RMSE=1.146359 R²=0.181641
+[saved] parity_plots/forces_parity_sample5_S_106138.png  |  MAE=0.436266 RMSE=0.568734 R²=0.133934
+[saved] parity_plots/forces_parity_sample6_Test1.png  |  MAE=0.695189 RMSE=0.848892 R²=-65656.447748
+Processed 7/7
+[saved] parity_plots/forces_parity_ALL.png  |  MAE=0.555790 RMSE=0.747961 R²=-0.307761
+[saved] parity_plots/forces_parity_EQ.png  |  MAE=0.498132 RMSE=0.662995 R²=-15494.718938
+[saved] parity_plots/forces_parity_NEQ.png  |  MAE=0.568603 RMSE=0.765563 R²=-0.120952
+Using device: cpu
+Training for 200 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Error in batch 0: mat1 and mat2 shapes cannot be multiplied (403540x3 and 96x3)
+Error in batch 1: mat1 and mat2 shapes cannot be multiplied (476524x3 and 96x3)
+Error in batch 2: mat1 and mat2 shapes cannot be multiplied (55414x3 and 9x3)
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 195, in <module>
+    main()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 123, in main
+    val_loss, val_energy_loss, val_force_loss = evaluate_model(model, val_loader, device)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 540, in evaluate_model
+    pred_energy = model(batch).view(-1)
+                  ^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 377, in forward
+    edge_vec = (pos[target] + (edge_shift @ lattice)) - pos[source] # [E,3]
+                               ~~~~~~~~~~~^~~~~~~~~
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (263782x3 and 51x3)
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Error in batch 0: 'GlobalStorage' object has no attribute 'edge_batch'
+Error in batch 1: 'GlobalStorage' object has no attribute 'edge_batch'
+Error in batch 2: 'GlobalStorage' object has no attribute 'edge_batch'
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Error in batch 0: 'GlobalStorage' object has no attribute 'edge_batch'
+Error in batch 1: 'GlobalStorage' object has no attribute 'edge_batch'
+Error in batch 2: 'GlobalStorage' object has no attribute 'edge_batch'
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 195, in <module>
+    main()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 123, in main
+    val_loss, val_energy_loss, val_force_loss = evaluate_model(model, val_loader, device)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 548, in evaluate_model
+    pred_energy = model(batch).view(-1)
+                  ^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 378, in forward
+    lattice_for_edges = data.lattice[data.edge_batch] # [E_total, 3, 3]
+                                     ^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch_geometric/data/data.py", line 559, in __getattr__
+    return getattr(self._store, key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch_geometric/data/storage.py", line 96, in __getattr__
+    raise AttributeError(
+AttributeError: 'GlobalStorage' object has no attribute 'edge_batch'
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Error in batch 0: mat1 and mat2 shapes cannot be multiplied (453712x3 and 453712x3)
+Error in batch 1: mat1 and mat2 shapes cannot be multiplied (349286x3 and 349286x3)
+Error in batch 2: mat1 and mat2 shapes cannot be multiplied (38124x3 and 38124x3)
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 195, in <module>
+    main()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 123, in main
+    val_loss, val_energy_loss, val_force_loss = evaluate_model(model, val_loader, device)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 552, in evaluate_model
+    pred_energy = model(batch).view(-1)
+                  ^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 387, in forward
+    shifted_pos = (edge_shift.unsqueeze(1) @ lattice_for_edges).squeeze(1) # [E_total, 3]
+                   ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (263782x3 and 263782x3)
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Error in batch 0: einsum(): the number of subscripts in the equation (3) does not match the number of dimensions (2) for operand 1 and no ellipsis was given
+Error in batch 1: einsum(): the number of subscripts in the equation (3) does not match the number of dimensions (2) for operand 1 and no ellipsis was given
+Error in batch 2: einsum(): the number of subscripts in the equation (3) does not match the number of dimensions (2) for operand 1 and no ellipsis was given
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 195, in <module>
+    main()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 123, in main
+    val_loss, val_energy_loss, val_force_loss = evaluate_model(model, val_loader, device)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 550, in evaluate_model
+    pred_energy = model(batch).view(-1)
+                  ^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 385, in forward
+    shifted_pos = torch.einsum('ij,ijk->ik', edge_shift, lattice_for_edges) # [E_total, 3]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/functional.py", line 380, in einsum
+    return _VF.einsum(equation, operands)  # type: ignore[attr-defined]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: einsum(): the number of subscripts in the equation (3) does not match the number of dimensions (2) for operand 1 and no ellipsis was given
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Error in batch 0: einsum(): the number of subscripts in the equation (3) does not match the number of dimensions (2) for operand 1 and no ellipsis was given
+Error in batch 1: einsum(): the number of subscripts in the equation (3) does not match the number of dimensions (2) for operand 1 and no ellipsis was given
+Error in batch 2: einsum(): the number of subscripts in the equation (3) does not match the number of dimensions (2) for operand 1 and no ellipsis was given
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 195, in <module>
+    main()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 123, in main
+    val_loss, val_energy_loss, val_force_loss = evaluate_model(model, val_loader, device)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 550, in evaluate_model
+    pred_energy = model(batch).view(-1)
+                  ^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 385, in forward
+    shifted_pos = torch.einsum('ij,ijk->ik', edge_shift, lattice_for_edges) # [E_total, 3]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/functional.py", line 380, in einsum
+    return _VF.einsum(equation, operands)  # type: ignore[attr-defined]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: einsum(): the number of subscripts in the equation (3) does not match the number of dimensions (2) for operand 1 and no ellipsis was given
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Error in batch 0: name 'target' is not defined
+Error in batch 1: name 'target' is not defined
+Error in batch 2: name 'target' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 195, in <module>
+    main()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 123, in main
+    val_loss, val_energy_loss, val_force_loss = evaluate_model(model, val_loader, device)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 555, in evaluate_model
+    pred_energy = model(batch).view(-1)
+                  ^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 392, in forward
+    edge_vec = (pos[target] + shifted_pos) - pos[source] # [E_total,3]
+                    ^^^^^^
+NameError: name 'target' is not defined
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=36.119, warmup=100 epochs
+Using device: cpu
+Training for 100 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 3 EQ structures (weight=0.3333), 2 NEQ structures (weight=0.5000)
+λ_force schedule: start=0.100, end=28.000, warmup=100 epochs
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Dataset limited to 5 samples (EQ: 4, NEQ: 1)
+Dataset limited to 5 samples (EQ: 4, NEQ: 1)
+Sampler: 4 EQ structures (weight=0.2500), 1 NEQ structures (weight=1.0000)
+λ_force schedule: start=0.100, end=40.000, warmup=100 epochs
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Dataset limited to 5 samples (EQ: 4, NEQ: 1)
+Dataset limited to 5 samples (EQ: 4, NEQ: 1)
+Sampler: 4 EQ structures (weight=0.2500), 1 NEQ structures (weight=1.0000)
+λ_force schedule: start=0.100, end=40.000, warmup=10 epochs
+
+Eval ▶ Energy RMSE: 8.9209 | Force RMSE: 0.3646
+Train Metrics 001 | λ_F=4.090 | Train: total=195.2978 E=185.4296 F=2.4128 | Val: total=79.7149 E=79.5820 F=0.1329
+[ckpt] New best model found! Saved to models/best_model.pth (val_loss: 79.714923)
+
+Eval ▶ Energy RMSE: 7.8074 | Force RMSE: 0.3866
+Train Metrics 002 | λ_F=8.080 | Train: total=30.2520 E=13.5633 F=2.0654 | Val: total=61.1053 E=60.9558 F=0.1495
+[ckpt] New best model found! Saved to models/best_model.pth (val_loss: 61.105268)
+
+Eval ▶ Energy RMSE: 8.7414 | Force RMSE: 0.3894
+Train Metrics 003 | λ_F=12.070 | Train: total=40.4382 E=24.9957 F=1.2794 | Val: total=76.5631 E=76.4115 F=0.1517
+
+Eval ▶ Energy RMSE: 8.2440 | Force RMSE: 0.3792
+Train Metrics 004 | λ_F=16.060 | Train: total=63.7166 E=50.6727 F=0.8122 | Val: total=68.1079 E=67.9641 F=0.1438
+
+Eval ▶ Energy RMSE: 7.4554 | Force RMSE: 0.3634
+Train Metrics 005 | λ_F=20.050 | Train: total=40.1834 E=27.0712 F=0.6540 | Val: total=55.7153 E=55.5832 F=0.1321
+[ckpt] New best model found! Saved to models/best_model.pth (val_loss: 55.715313)
+
+Eval ▶ Energy RMSE: 7.6649 | Force RMSE: 0.3467
+Train Metrics 006 | λ_F=24.040 | Train: total=18.7381 E=6.3060 F=0.5171 | Val: total=58.8715 E=58.7512 F=0.1202
+
+Eval ▶ Energy RMSE: 8.3600 | Force RMSE: 0.3215
+Train Metrics 007 | λ_F=28.030 | Train: total=11.6271 E=1.1759 F=0.3729 | Val: total=69.9935 E=69.8901 F=0.1034
+
+Eval ▶ Energy RMSE: 8.5241 | Force RMSE: 0.2893
+Train Metrics 008 | λ_F=32.020 | Train: total=16.0028 E=6.7437 F=0.2892 | Val: total=72.7446 E=72.6609 F=0.0837
+
+Eval ▶ Energy RMSE: 8.1818 | Force RMSE: 0.2584
+Train Metrics 009 | λ_F=36.010 | Train: total=16.0979 E=7.9118 F=0.2273 | Val: total=67.0084 E=66.9417 F=0.0668
+
+Eval ▶ Energy RMSE: 7.6893 | Force RMSE: 0.2587
+Train Metrics 010 | λ_F=40.000 | Train: total=9.1122 E=1.9349 F=0.1794 | Val: total=59.1916 E=59.1247 F=0.0669
+[ckpt] Saved latest checkpoint at epoch 10
+[dump] Saved energy and force data at epoch 10
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 229, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 150, in evaluate_all
+    pred_E = model(data)
+             ^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 378, in forward
+    if data.lattice.dim() == 2 and data.lattice.shape[0] == data.num_graphs * 3:
+                                                            ^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch_geometric/data/data.py", line 559, in __getattr__
+    return getattr(self._store, key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch_geometric/data/storage.py", line 96, in __getattr__
+    raise AttributeError(
+AttributeError: 'GlobalStorage' object has no attribute 'num_graphs'
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 229, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 150, in evaluate_all
+    pred_E = model(data)
+             ^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 378, in forward
+    if data.lattice.dim() == 2 and data.lattice.shape[0] == data.num_graphs * 3:
+                                                            ^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch_geometric/data/data.py", line 559, in __getattr__
+    return getattr(self._store, key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch_geometric/data/storage.py", line 96, in __getattr__
+    raise AttributeError(
+AttributeError: 'GlobalStorage' object has no attribute 'num_graphs'
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 229, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 150, in evaluate_all
+    pred_E = model(data)
+             ^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 378, in forward
+    num_graphs = int(data.batch.max()) + 1 if hasattr(data, 'batch') else 1
+                     ^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'max'
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 243, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 150, in evaluate_all
+    pred_E = model(batch_data)
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 387, in forward
+    shifted_pos = torch.einsum('ij,ijk->ik', edge_shift, lattice_for_edges) # [E_total, 3]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/functional.py", line 380, in einsum
+    return _VF.einsum(equation, operands)  # type: ignore[attr-defined]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: einsum(): the number of subscripts in the equation (3) does not match the number of dimensions (2) for operand 1 and no ellipsis was given
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 243, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 150, in evaluate_all
+    pred_E = model(batch_data)
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 387, in forward
+    shifted_pos = torch.einsum('ej,ejk->ek', edge_shift, lattice_for_edges) # [E_total, 3]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/functional.py", line 380, in einsum
+    return _VF.einsum(equation, operands)  # type: ignore[attr-defined]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: einsum(): the number of subscripts in the equation (3) does not match the number of dimensions (2) for operand 1 and no ellipsis was given
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 243, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 150, in evaluate_all
+    pred_E = model(batch_data)
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 387, in forward
+    shifted_pos = torch.bmm(edge_shift.unsqueeze(1), lattice_for_edges).squeeze(1) # [E_total, 3]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: batch2 must be a 3D tensor
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+DEBUG: shape of edge_shift.unsqueeze(1): torch.Size([263782, 1, 3])
+DEBUG: shape of lattice_for_edges: torch.Size([263782, 3])
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 243, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 150, in evaluate_all
+    pred_E = model(batch_data)
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 389, in forward
+    shifted_pos = torch.bmm(edge_shift.unsqueeze(1), lattice_for_edges).squeeze(1) # [E_total, 3]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: batch2 must be a 3D tensor
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+[saved] parity_plots/forces_parity_sample0_S_116406.png  |  MAE=0.825073 RMSE=1.085901 R²=0.000000
+[saved] parity_plots/forces_parity_sample1_S_146902.png  |  MAE=0.999309 RMSE=1.267211 R²=0.000000
+[saved] parity_plots/forces_parity_sample2_Test43.png  |  MAE=1.256749 RMSE=1.617668 R²=-93122.827382
+[saved] parity_plots/forces_parity_sample3_Test62.png  |  MAE=1.084500 RMSE=1.375767 R²=-115063.579507
+[saved] parity_plots/forces_parity_sample4_Test23.png  |  MAE=1.101144 RMSE=1.353849 R²=-72256.758241
+[saved] parity_plots/forces_parity_sample5_Test54.png  |  MAE=1.210478 RMSE=1.556904 R²=-146177.146492
+[saved] parity_plots/forces_parity_sample6_Test50.png  |  MAE=1.012584 RMSE=1.285843 R²=-308697.528994
+[saved] parity_plots/forces_parity_sample7_Test4.png  |  MAE=1.017724 RMSE=1.270659 R²=-158041.529360
+[saved] parity_plots/forces_parity_sample8_S_23543.png  |  MAE=0.765756 RMSE=0.935631 R²=-1.972405
+[saved] parity_plots/forces_parity_sample9_Test60.png  |  MAE=0.888492 RMSE=1.102775 R²=-203819.354531
+[saved] parity_plots/forces_parity_sample10_Test30.png  |  MAE=1.297215 RMSE=1.593627 R²=-465194.163016
+[saved] parity_plots/forces_parity_sample11_Test11.png  |  MAE=1.268935 RMSE=1.585445 R²=-137903.912728
+[saved] parity_plots/forces_parity_sample12_Test57.png  |  MAE=0.933150 RMSE=1.216416 R²=-85377.975684
+[saved] parity_plots/forces_parity_sample13_Test70.png  |  MAE=1.141815 RMSE=1.487539 R²=-91805.378013
+[saved] parity_plots/forces_parity_sample14_Test13.png  |  MAE=1.129393 RMSE=1.426388 R²=-145387.834542
+[saved] parity_plots/forces_parity_sample15_Test29.png  |  MAE=0.925920 RMSE=1.154913 R²=-40832.089075
+[saved] parity_plots/forces_parity_sample16_Test8.png  |  MAE=0.995474 RMSE=1.256633 R²=-188022.119012
+Processed 17/17
+[saved] parity_plots/forces_parity_ALL.png  |  MAE=1.081394 RMSE=1.377461 R²=-36.842218
+[saved] parity_plots/forces_parity_EQ.png  |  MAE=1.090255 RMSE=1.387284 R²=-118062.167805
+[saved] parity_plots/forces_parity_NEQ.png  |  MAE=0.882904 RMSE=1.135378 R²=-0.099052

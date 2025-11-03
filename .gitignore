@@ -1,4 +1,7 @@
 
 GNN-ML-Model/
-.DS_Store
-models/
+*.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+venv/

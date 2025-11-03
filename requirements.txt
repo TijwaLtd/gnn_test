@@ -18,3 +18,5 @@ torch_geometric==2.5.3
 # Essential build tools
 setuptools>=65.5.0
 wheel>=0.38.4
+matplotlib 
+seaborn
