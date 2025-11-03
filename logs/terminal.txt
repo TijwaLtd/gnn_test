@@ -854,3 +854,9 @@ Found 17 test samples in data/index_val.csv
 Loading weights from models/best_model.pth …
 Processed 17/17
 [saved] parity_plots/forces_parity_ALL.png  |  MAE=1.081394 RMSE=1.377461 R²=-36.842218
+Using device: cpu
+Training for 5 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+λ_force schedule: start=0.100, end=1.000, warmup=100 epochs
