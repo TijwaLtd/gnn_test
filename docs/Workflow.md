@@ -71,15 +71,37 @@ The script will save `best_model.pth` and `latest_checkpoint.pt` in the `models/
 
 ### Step 4: Evaluate the Model
 
-After training is complete, you can evaluate your best model.
+After training is complete, you can evaluate your best model using the `src/evaluation/test_parity_2.py` script. The script has several command-line options to control the evaluation process.
 
-1.  **Run the script:** The evaluation script automatically loads the `best_model.pth` and processes data in batches.
+1.  **Default Evaluation:**
+    By default, the script generates a single aggregate parity plot for all test samples.
 
     ```bash
     python src/evaluation/test_parity_2.py
     ```
+    *   **Output:** `parity_plots/forces_parity_ALL.png`
 
-2.  **Check the results:** The output plots will be saved in the `parity_plots/` directory. Pay special attention to `forces_parity_EQ.png` to confirm that the noise at equilibrium has been reduced.
+2.  **Generating All Plots:**
+    To generate a comprehensive set of plots (including per-sample, equilibrium-only, and non-equilibrium-only plots), use the `--gen-all-plots` flag.
+
+    ```bash
+    python src/evaluation/test_parity_2.py --gen-all-plots
+    ```
+    *   **Outputs:**
+        *   `parity_plots/forces_parity_ALL.png`
+        *   `parity_plots/forces_parity_EQ.png`
+        *   `parity_plots/forces_parity_NEQ.png`
+        *   Individual plots for each sample in the test set.
+
+3.  **Handling Memory Errors:**
+    If you encounter a `torch.cuda.OutOfMemoryError` (especially on systems prone to memory fragmentation), you can use the `--use-expandable-segments` flag. This flag can be combined with other flags.
+
+    ```bash
+    # Example: Generate all plots while using the expandable segments memory configuration
+    python src/evaluation/test_parity_2.py --gen-all-plots --use-expandable-segments
+    ```
+
+4.  **Check the results:** The output plots will be saved in the `parity_plots/` directory. Pay special attention to `forces_parity_EQ.png` (when generated) to confirm that the noise at equilibrium has been reduced.
 
 ---
 

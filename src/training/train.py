@@ -19,7 +19,7 @@ class ConditionalJitter:
         self.jitter_transform = jitter_transform
 
     def __call__(self, data):
-        if not data.is_eq.item():  # Apply jitter only if not equilibrium
+        if data.is_eq.item():  # Apply jitter only if it IS an equilibrium structure
             return self.jitter_transform(data)
         return data
 
@@ -107,7 +107,7 @@ def main():
     avg_natoms = all_natoms.mean().item()
     
     lambda_forces_start = 0.1
-    lambda_forces_end = avg_natoms / 3.0
+    lambda_forces_end = 1.0
     lambda_warmup_epochs = args.lambda_warmup_epochs
 
     print(f"λ_force schedule: start={lambda_forces_start:.3f}, end={lambda_forces_end:.3f}, warmup={lambda_warmup_epochs} epochs")

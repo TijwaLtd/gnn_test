@@ -10,6 +10,15 @@ Edit the CONFIG block below.
 """
 
 import os, sys
+import argparse
+
+# Check for a command-line flag to set the memory allocator config
+if '--use-expandable-segments' in sys.argv:
+    os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True'
+    print("Using expandable segments for CUDA memory allocation.")
+    # Remove the flag from sys.argv so it doesn't interfere with other argument parsing
+    sys.argv.remove('--use-expandable-segments')
+
 import numpy as np
 import pandas as pd
 import torch
@@ -116,7 +125,7 @@ def load_weights(model, ckpt_path, device="cpu", strict=True):
 
 def evaluate_all(model_path, index_csv, root_dir, out_dir,
                  aggregate_png, dpi=200, make_per_sample=False, per_sample_prefix="forces_parity_",
-                 strict_load=True):
+                 strict_load=True, gen_all_plots=False):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
@@ -180,7 +189,7 @@ def evaluate_all(model_path, index_csv, root_dir, out_dir,
                 neq_true.append(graph_true_F_np)
 
             # Optional per-sample parity plot
-            if make_per_sample:
+            if make_per_sample and gen_all_plots:
                 suffix = f"sample{processed_samples_count}"
                 if tag_for_graph is not None and isinstance(tag_for_graph, str):
                     safe_tag = "".join(c if c.isalnum() or c in "-_." else "_" for c in tag_for_graph)
@@ -216,30 +225,35 @@ def evaluate_all(model_path, index_csv, root_dir, out_dir,
         out_png=agg_png, dpi=dpi
     )
 
-    # 2) EQ samples only
-    if eq_true:
-        x_eq = np.concatenate(eq_true)
-        y_eq = np.concatenate(eq_pred)
-        eq_png = os.path.join(out_dir, "forces_parity_EQ.png")
-        forces_parity_plot(
-            x_true=x_eq, y_pred=y_eq,
-            title="Force Parity — EQUILIBRIUM samples",
-            out_png=eq_png, dpi=dpi
-        )
+    if gen_all_plots:
+        # 2) EQ samples only
+        if eq_true:
+            x_eq = np.concatenate(eq_true)
+            y_eq = np.concatenate(eq_pred)
+            eq_png = os.path.join(out_dir, "forces_parity_EQ.png")
+            forces_parity_plot(
+                x_true=x_eq, y_pred=y_eq,
+                title="Force Parity — EQUILIBRIUM samples",
+                out_png=eq_png, dpi=dpi
+            )
 
-    # 3) NEQ samples only
-    if neq_true:
-        x_neq = np.concatenate(neq_true)
-        y_neq = np.concatenate(neq_pred)
-        neq_png = os.path.join(out_dir, "forces_parity_NEQ.png")
-        forces_parity_plot(
-            x_true=x_neq, y_pred=y_neq,
-            title="Force Parity — NON-EQUILIBRIUM samples",
-            out_png=neq_png, dpi=dpi
-        )
+        # 3) NEQ samples only
+        if neq_true:
+            x_neq = np.concatenate(neq_true)
+            y_neq = np.concatenate(neq_pred)
+            neq_png = os.path.join(out_dir, "forces_parity_NEQ.png")
+            forces_parity_plot(
+                x_true=x_neq, y_pred=y_neq,
+                title="Force Parity — NON-EQUILIBRIUM samples",
+                out_png=neq_png, dpi=dpi
+            )
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Evaluate a trained E3NN force model.")
+    parser.add_argument('--gen-all-plots', action='store_true', help='Generate all parity plots (per-sample, EQ, NEQ).')
+    args = parser.parse_args()
+
     evaluate_all(
         model_path        = CONFIG["model_path"],
         index_csv         = CONFIG["index_csv"],
@@ -250,4 +264,5 @@ if __name__ == "__main__":
         make_per_sample   = CONFIG["make_per_sample"],
         per_sample_prefix = CONFIG["per_sample_prefix"],
         strict_load       = CONFIG["strict_load"],
+        gen_all_plots     = args.gen_all_plots
     )

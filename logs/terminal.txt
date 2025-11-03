@@ -849,3 +849,8 @@ Processed 17/17
 [saved] parity_plots/forces_parity_ALL.png  |  MAE=1.081394 RMSE=1.377461 R²=-36.842218
 [saved] parity_plots/forces_parity_EQ.png  |  MAE=1.090255 RMSE=1.387284 R²=-118062.167805
 [saved] parity_plots/forces_parity_NEQ.png  |  MAE=0.882904 RMSE=1.135378 R²=-0.099052
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+Processed 17/17
+[saved] parity_plots/forces_parity_ALL.png  |  MAE=1.081394 RMSE=1.377461 R²=-36.842218
