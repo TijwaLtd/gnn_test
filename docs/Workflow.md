@@ -82,7 +82,7 @@ Run the new preparation script to generate the `index_train.csv` and `index_val.
 python src/processing/prepare_splits.py --neq_csv data/index_neq.csv --eq_csv data/index_eq.csv
 ```
 
-### Step 3: Train the Model
+### Step 4: Train the Model
 
 Run the training script. You can specify the number of epochs you want to train for.
 
@@ -96,7 +96,7 @@ python src/training/train.py --epochs 150
 
 The script will save `best_model.pth` and `latest_checkpoint.pt` in the `models/` directory.
 
-### Step 4: Evaluate the Model
+### Step 5: Evaluate the Model
 
 After training is complete, you can evaluate your best model using the `src/evaluation/test_parity_2.py` script. The script has several command-line options to control the evaluation process.
 
@@ -146,22 +146,22 @@ Training on a GPU in Google Colab can significantly speed up the process. Hereâ€
 
 3.  **Clone Your Project:**
     *   You will need to host your project on a Git repository (like GitHub, GitLab, etc.).
-    *   In a Colab cell, clone your repository. You'll need to use a Personal Access Token (PAT) if the repository is private.
+    *   In a Colab cell, clone the specific `gnn_latest` branch. You'll need to use a Personal Access Token (PAT) if the repository is private.
 
     ```python
     # For a public repository
-    !git clone https://github.com/your-username/your-repository-name.git
+    !git clone -b gnn_latest https://github.com/your-username/your-repository-name.git
     %cd your-repository-name
 
     # For a private repository
     # Replace <YOUR_PAT> with your Personal Access Token
     # Replace <YOUR_USERNAME> and <YOUR_REPO_NAME>
-    !git clone https://<YOUR_PAT>@github.com/<YOUR_USERNAME>/<YOUR_REPO_NAME>.git
+    !git clone -b gnn_latest https://<YOUR_PAT>@github.com/<YOUR_USERNAME>/<YOUR_REPO_NAME>.git
     %cd <YOUR_REPO_NAME>
     ```
 
 4.  **Upload Your Data:**
-    *   The `data/` directory containing `DFT_DATA` and your index CSVs is too large to be included directly in the Git repository. You will need to upload it to your Google Drive.
+    *   The `data/` directory containing `DFT_DATA` is too large to be included directly in the Git repository. You will need to upload it to your Google Drive.
     *   **Zip your `data` directory:** Create a `data.zip` file on your local machine.
     *   **Upload to Google Drive:** Upload `data.zip` to the root of your Google Drive.
     *   **Mount Google Drive in Colab:** In a new cell, mount your drive.
@@ -183,20 +183,26 @@ Training on a GPU in Google Colab can significantly speed up the process. Hereâ€
     !pip install -r requirements.txt
     ```
 
-6.  **Run the Workflow:**
+6.  **Run the Full Workflow:**
     *   Now you can follow the standard workflow steps within the Colab notebook cells.
 
     ```python
-    # Step 1: Prepare Data Splits (if needed)
+    # Step 1: Build and Prepare the Dataset
+    !python src/processing/build_dataset.py
+
+    # Step 2: Verify the Data Splits
+    !wc -l data/index_*.csv
+    !python -c "import pandas as pd; print('Training set:'); print(pd.read_csv('data/index_train.csv', header=None)[0].apply(lambda x: 'EQ' if 'Data_eq' in x else 'NEQ').value_counts())"
+    !python -c "import pandas as pd; print('\nValidation set:'); print(pd.read_csv('data/index_val.csv', header=None)[0].apply(lambda x: 'EQ' if 'Data_eq' in x else 'NEQ').value_counts())"
     !python src/processing/prepare_splits.py --neq_csv data/index_neq.csv --eq_csv data/index_eq.csv
 
-    # Step 2: Train the Model
+    # Step 3: Train the Model
     # You can train for more epochs now that you have a GPU
     !python src/training/train.py --epochs 300
 
-    # Step 3: Evaluate the Model
-    # Remember to update the model path in the script if necessary
-    !python src/evaluation/test_parity_2.py
+    # Step 4: Evaluate the Model
+    # The script will automatically use the best model saved during training
+    !python src/evaluation/test_parity_2.py --gen-all-plots
     ```
 
 7.  **Download Results:**
