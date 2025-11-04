@@ -47,7 +47,7 @@ def main():
         neq_csv=index_neq_csv,
         eq_csv=index_eq_csv,
         out_train=out_train_csv,
-        out_val=out_val_csv
+        out_test=out_val_csv
     )
 
     print("--- Data Processing Pipeline Complete ---")

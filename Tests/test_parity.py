@@ -46,19 +46,35 @@ def forces_parity_plot(x_true: np.ndarray, y_pred: np.ndarray,
                        title: str,
                        out_png: str,
                        dpi: int = 200,
-                       show: bool = False):
-    """Generic parity plot helper. x_true and y_pred are 1D arrays (flattened forces)."""
+                       show: bool = False,
+                       filter_zeros: bool = True):
+    """
+    Generic parity plot helper. x_true and y_pred are 1D arrays (flattened forces).
+    If filter_zeros is True, points where both x_true and y_pred are close to zero are filtered out
+    of the visualization (but still included in error metrics).
+    """
+    # Calculate metrics on all data points
     mae  = float(np.mean(np.abs(y_pred - x_true)))
     rmse = float(np.sqrt(np.mean((y_pred - x_true) ** 2)))
     r2   = float(_r2_score(x_true, y_pred))
 
-    lim = np.max(np.abs(np.concatenate([x_true, y_pred]))) * 1.05
+    # Filter out points where both x and y are close to zero for plotting
+    if filter_zeros:
+        non_zero_mask = (np.abs(x_true) > 1e-3) | (np.abs(y_pred) > 1e-3)
+        x_plot = x_true[non_zero_mask]
+        y_plot = y_pred[non_zero_mask]
+        print(f"Filtered out {len(x_true) - len(x_plot)} zero-force points from visualization")
+    else:
+        x_plot, y_plot = x_true, y_pred
+
+    lim = np.max(np.abs(np.concatenate([x_plot, y_plot]))) * 1.05
     lim = max(lim, 1e-3)
 
     plt.figure(figsize=(7, 6))
-    plt.scatter(x_true, y_pred, s=6, alpha=0.5, edgecolors="none")
+    plt.scatter(x_plot, y_plot, s=6, alpha=0.5, edgecolors="none")
     plt.plot([-lim, lim], [-lim, lim], "k-", linewidth=1.5)
-    plt.xlim([-lim, lim]); plt.ylim([-lim, lim])
+    plt.xlim([-lim, lim])
+    plt.ylim([-lim, lim])
     plt.xlabel("DFT Force (eV/Å)")
     plt.ylabel("NN Force (eV/Å)")
     plt.title(f"{title}\nMAE={mae:.4f}  RMSE={rmse:.4f}  R²={r2:.4f}")

@@ -865,3 +865,227 @@ Found 17 test samples in data/index_val.csv
 Loading weights from models/best_model.pth …
 Processed 17/17
 [saved] parity_plots/forces_parity_ALL.png  |  MAE=1.081394 RMSE=1.377461 R²=-36.842218 (Metrics on unfiltered data)
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 301, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 203, in evaluate_all
+    pred_E = model(batch_data)
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 407, in forward
+    node_features = layer(node_features, edge_index, sh_features, rbf_features)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 288, in forward
+    messages = self.tp(node_features[source], edge_attr, rbf_weights)  # [num_edges, tp_irreps]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/e3nn/o3/_tensor_product/_tensor_product.py", line 554, in forward
+    return self._compiled_main_left_right(x, y, real_weight)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+[saved] parity_plots/forces_parity_sample0_S_116406.png  |  MAE=0.825073 RMSE=1.085901 R²=0.000000 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample1_S_146902.png  |  MAE=0.999309 RMSE=1.267211 R²=0.000000 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample2_Test43.png  |  MAE=1.256749 RMSE=1.617668 R²=-93122.827382 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample3_Test62.png  |  MAE=1.084500 RMSE=1.375767 R²=-115063.579507 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample4_Test23.png  |  MAE=1.101144 RMSE=1.353849 R²=-72256.751557 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample5_Test54.png  |  MAE=1.210478 RMSE=1.556904 R²=-146177.146492 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample6_Test50.png  |  MAE=1.012584 RMSE=1.285843 R²=-308697.497340 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample7_Test4.png  |  MAE=1.017724 RMSE=1.270659 R²=-158041.529360 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample8_S_23543.png  |  MAE=0.765756 RMSE=0.935631 R²=-1.972405 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample9_Test60.png  |  MAE=0.888492 RMSE=1.102775 R²=-203819.326116 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample10_Test30.png  |  MAE=1.297215 RMSE=1.593626 R²=-465194.131960 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample11_Test11.png  |  MAE=1.268935 RMSE=1.585445 R²=-137903.922030 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample12_Test57.png  |  MAE=0.933150 RMSE=1.216416 R²=-85377.965901 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample13_Test70.png  |  MAE=1.141815 RMSE=1.487539 R²=-91805.378013 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample14_Test13.png  |  MAE=1.129393 RMSE=1.426388 R²=-145387.834542 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample15_Test29.png  |  MAE=0.925920 RMSE=1.154913 R²=-40832.091670 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample16_Test8.png  |  MAE=0.995474 RMSE=1.256633 R²=-188022.098825 (Metrics on unfiltered data)
+Processed 17/17
+[saved] parity_plots/forces_parity_ALL.png  |  MAE=1.081394 RMSE=1.377461 R²=-36.842218 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_EQ.png  |  MAE=1.090255 RMSE=1.387283 R²=-118062.155919 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_NEQ.png  |  MAE=0.882904 RMSE=1.135378 R²=-0.099052 (Metrics on unfiltered data)
+Using device: cpu
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'graph_path'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 301, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 177, in evaluate_all
+    dataset = LazyGraphDataset(index_csv=index_csv, root_dir=root_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/data/lazy_graph_dataset.py", line 23, in __init__
+    self.df["graph_path"] = self.df["graph_path"].astype(str)
+                            ~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/core/frame.py", line 4113, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'graph_path'
+Using device: cpu
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'graph_path'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 301, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 177, in evaluate_all
+    dataset = LazyGraphDataset(index_csv=index_csv, root_dir=root_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/data/lazy_graph_dataset.py", line 23, in __init__
+    self.df["graph_path"] = self.df["graph_path"].astype(str)
+                            ~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/core/frame.py", line 4113, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'graph_path'
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 301, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 198, in evaluate_all
+    for batch_data in data_loader: # 'batch_data' is a Batch object
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 631, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 675, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 51, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 51, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/data/lazy_graph_dataset.py", line 77, in __getitem__
+    data: Data = self._load_graph(full_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/data/lazy_graph_dataset.py", line 64, in _load_graph
+    graph_obj = torch.load(full_path_norm, map_location="cpu", weights_only=False)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/serialization.py", line 998, in load
+    with _open_file_like(f, 'rb') as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/serialization.py", line 445, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/serialization.py", line 426, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/DFT_DATA/Test43/graphs.pt'
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 301, in <module>
+    evaluate_all(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 198, in evaluate_all
+    for batch_data in data_loader: # 'batch_data' is a Batch object
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 631, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 675, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 51, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 51, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/data/lazy_graph_dataset.py", line 77, in __getitem__
+    data: Data = self._load_graph(full_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/data/lazy_graph_dataset.py", line 64, in _load_graph
+    graph_obj = torch.load(full_path_norm, map_location="cpu", weights_only=False)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/serialization.py", line 998, in load
+    with _open_file_like(f, 'rb') as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/serialization.py", line 445, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/serialization.py", line 426, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/DFT_DATA/Test43/graphs.pt'
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/evaluation/test_parity_2.py", line 316, in <module>
+    root_dir          = CONFIG["root_dir"],
+                        ~~~~~~^^^^^^^^^^^^
+KeyError: 'root_dir'
+Using device: cpu
+Found 17 test samples in data/index_val.csv
+Loading weights from models/best_model.pth …
+[saved] parity_plots/forces_parity_sample0_S_116406.png  |  MAE=0.825073 RMSE=1.085901 R²=0.000000 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample1_S_146902.png  |  MAE=0.999309 RMSE=1.267211 R²=0.000000 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample2_Test43.png  |  MAE=1.256749 RMSE=1.617668 R²=-93122.815315 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample3_Test62.png  |  MAE=1.084500 RMSE=1.375767 R²=-115063.579507 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample4_Test23.png  |  MAE=1.101144 RMSE=1.353849 R²=-72256.751557 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample5_Test54.png  |  MAE=1.210478 RMSE=1.556904 R²=-146177.126044 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample6_Test50.png  |  MAE=1.012583 RMSE=1.285843 R²=-308697.497340 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample7_Test4.png  |  MAE=1.017724 RMSE=1.270659 R²=-158041.529360 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample8_S_23543.png  |  MAE=0.765756 RMSE=0.935631 R²=-1.972405 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample9_Test60.png  |  MAE=0.888492 RMSE=1.102775 R²=-203819.326116 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample10_Test30.png  |  MAE=1.297215 RMSE=1.593627 R²=-465194.194072 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample11_Test11.png  |  MAE=1.268935 RMSE=1.585445 R²=-137903.912728 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample12_Test57.png  |  MAE=0.933150 RMSE=1.216416 R²=-85377.965901 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample13_Test70.png  |  MAE=1.141815 RMSE=1.487539 R²=-91805.378013 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample14_Test13.png  |  MAE=1.129393 RMSE=1.426388 R²=-145387.834542 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample15_Test29.png  |  MAE=0.925920 RMSE=1.154913 R²=-40832.089075 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_sample16_Test8.png  |  MAE=0.995474 RMSE=1.256633 R²=-188022.119012 (Metrics on unfiltered data)
+Processed 17/17
+[saved] parity_plots/forces_parity_ALL.png  |  MAE=1.081394 RMSE=1.377461 R²=-36.842218 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_EQ.png  |  MAE=1.090255 RMSE=1.387283 R²=-118062.155919 (Metrics on unfiltered data)
+[saved] parity_plots/forces_parity_NEQ.png  |  MAE=0.882904 RMSE=1.135378 R²=-0.099052 (Metrics on unfiltered data)

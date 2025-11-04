@@ -45,9 +45,36 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Step 2: Prepare Data Splits
+### Step 2: Build and Prepare the Dataset
 
-Ensure you have your non-equilibrium and equilibrium index files (e.g., `index_neq.csv`, `index_eq.csv`) in the `data/` directory.
+To process the raw data and prepare it for training, use the `build_dataset.py` script. This will:
+1. Process both equilibrium and non-equilibrium data
+2. Generate the necessary index files
+3. Create balanced train/validation splits
+
+```bash
+# Run the build script
+python src/processing/build_dataset.py
+
+# This will create the following files in the data/ directory:
+# - index_neq.csv: Index of non-equilibrium structures
+# - index_eq.csv: Index of equilibrium structures
+# - index_train.csv: Training set (80% of data)
+# - index_val.csv: Validation set (20% of data)
+```
+
+### Step 3: Verify the Data Splits
+
+Check the distribution of your data splits to ensure they're properly balanced:
+
+```bash
+# Check the number of samples in each split
+wc -l data/index_*.csv
+
+# Check the distribution of equilibrium/non-equilibrium samples
+python -c "import pandas as pd; print('Training set:'); print(pd.read_csv('data/index_train.csv', header=None)[0].apply(lambda x: 'EQ' if 'Data_eq' in x else 'NEQ').value_counts())"
+python -c "import pandas as pd; print('\nValidation set:'); print(pd.read_csv('data/index_val.csv', header=None)[0].apply(lambda x: 'EQ' if 'Data_eq' in x else 'NEQ').value_counts())"
+```
 
 Run the new preparation script to generate the `index_train.csv` and `index_val.csv` files that the training script needs.
 

@@ -20,3 +20,4 @@ setuptools>=65.5.0
 wheel>=0.38.4
 matplotlib 
 seaborn
+scikit-learn

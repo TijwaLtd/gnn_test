@@ -31,7 +31,6 @@ from torch_geometric.loader import DataLoader
 CONFIG = dict(
     model_path        = r"models/best_model.pth", # <-- IMPORTANT: UPDATE THIS PATH
     index_csv         = r"data/index_val.csv",    # <-- Or your test set
-    root_dir          = r"data/DFT_DATA",
     out_dir           = "parity_plots",
     aggregate_png     = "forces_parity_ALL.png",
     dpi               = 300,
@@ -167,14 +166,14 @@ def load_weights(model, ckpt_path, device="cpu", strict=True):
     return checkpoint  # caller can use epoch/val_loss if present
 
 
-def evaluate_all(model_path, index_csv, root_dir, out_dir,
+def evaluate_all(model_path, index_csv, out_dir,
                  aggregate_png, dpi=200, make_per_sample=False, per_sample_prefix="forces_parity_",
                  strict_load=True, gen_all_plots=False):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
-    # Dataset
-    dataset = LazyGraphDataset(index_csv=index_csv, root_dir=root_dir)
+    # Dataset - root_dir will be read from the CSV file
+    dataset = LazyGraphDataset(index_csv=index_csv, root_dir=".")
     n = len(dataset)
     print(f"Found {n} test samples in {index_csv}")
 
@@ -299,14 +298,13 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     evaluate_all(
-        model_path        = CONFIG["model_path"],
-        index_csv         = CONFIG["index_csv"],
-        root_dir          = CONFIG["root_dir"],
-        out_dir           = CONFIG["out_dir"],
-        aggregate_png     = CONFIG["aggregate_png"],
-        dpi               = CONFIG["dpi"],
-        make_per_sample   = CONFIG["make_per_sample"],
-        per_sample_prefix = CONFIG["per_sample_prefix"],
-        strict_load       = CONFIG["strict_load"],
-        gen_all_plots     = args.gen_all_plots
+        model_path     = CONFIG["model_path"],
+        index_csv      = CONFIG["index_csv"],
+        out_dir        = CONFIG["out_dir"],
+        aggregate_png  = CONFIG["aggregate_png"],
+        dpi            = CONFIG["dpi"],
+        make_per_sample= CONFIG["make_per_sample"],
+        per_sample_prefix=CONFIG["per_sample_prefix"],
+        strict_load    = CONFIG["strict_load"],
+        gen_all_plots  = args.gen_all_plots,
     )
