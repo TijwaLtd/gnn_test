@@ -43,13 +43,13 @@ def main():
     # Initialize model with reasonable defaults
     model = E3NNForceModel(
         num_atom_types=120,
-        cutoff=6.4,
-        num_rbf=64,
-        max_l=3,
-        irreps_hidden="32x0e + 16x1o + 8x2e + 4x3o",
-        num_layers=3
+        cutoff=4.0,                 # ↓ neighborhood size → big speedup; still OK for smoke tests
+        num_rbf=16,                 # ↓ basis size
+        max_l=1,                    # only scalars + vectors; drops costly higher-order tensors
+        irreps_hidden="8x0e + 4x1o",# narrow hidden width
+        num_layers=2                # minimal depth that still learns something
     ).to(device)
-    
+        
     # Print model info
     total_params = sum(p.numel() for p in model.parameters())
     trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
@@ -63,7 +63,7 @@ def main():
     )
     
     # Set the root directory to your DFT_DATA folder
-    ROOT = "data/DFT_DATA"
+    ROOT = "D:\Sara\All_DFT_Data"
     
     
 
@@ -99,8 +99,8 @@ def main():
           f"{neq_count} NEQ structures (weight={weight_neq:.4f})")
 
     # Data loaders
-    train_loader = DataLoader(train_ds, batch_size=32, sampler=sampler, num_workers=os.cpu_count())
-    val_loader = DataLoader(val_ds, batch_size=32, shuffle=False, num_workers=os.cpu_count())
+    train_loader = DataLoader(train_ds, batch_size=1, sampler=sampler, num_workers=os.cpu_count())
+    val_loader = DataLoader(val_ds, batch_size=1, shuffle=False, num_workers=os.cpu_count())
     
     # --- Progressive Force Weighting ---
     all_natoms = torch.tensor([g.n_atoms for g in train_ds], dtype=torch.float)

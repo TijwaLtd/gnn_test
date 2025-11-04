@@ -29,10 +29,10 @@ from torch_geometric.loader import DataLoader
 # USER CONFIG
 # ---------------------------------------------------------------------
 CONFIG = dict(
-    model_path        = r"models/best_model.pth", # <-- IMPORTANT: UPDATE THIS PATH
-    index_csv         = r"data/index_val.csv",    # <-- Or your test set
+    model_path        = r"C:\Users\labadmin\Documents\GNN imp\src\models\latest_checkpoint.pt", # <-- IMPORTANT: UPDATE THIS PATH
+    index_csv         = r"C:\Users\labadmin\Documents\GNN imp\src\data\index_eq.csv",    # <-- Or your test set
     out_dir           = "parity_plots",
-    aggregate_png     = "forces_parity_ALL.png",
+    aggregate_png     = "forces_parity_new.png",
     dpi               = 300,
     make_per_sample   = True, # Set to True to get EQ/NEQ plots
     per_sample_prefix = "forces_parity_",
@@ -129,11 +129,11 @@ def build_model(device):
     """Make sure these hyperparams match your training run."""
     model = E3NNForceModel(
         num_atom_types=120,
-        cutoff=6.3,
-        num_rbf=64,
-        max_l=3,
-        irreps_hidden="32x0e + 16x1o + 8x2e + 4x3o",
-        num_layers=3,
+        cutoff=4.0,                 # ↓ neighborhood size → big speedup; still OK for smoke tests
+        num_rbf=16,                 # ↓ basis size
+        max_l=1,                    # only scalars + vectors; drops costly higher-order tensors
+        irreps_hidden="8x0e + 4x1o",# narrow hidden width
+        num_layers=2                # minimal depth that still learns something
     ).to(device)
     return model
 
@@ -178,7 +178,7 @@ def evaluate_all(model_path, index_csv, out_dir,
     print(f"Found {n} test samples in {index_csv}")
 
     # Create DataLoader
-    data_loader = DataLoader(dataset, batch_size=32, shuffle=False)
+    data_loader = DataLoader(dataset, batch_size=1, shuffle=False)
 
     # Model + weights
     model = build_model(device)
