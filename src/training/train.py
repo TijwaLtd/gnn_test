@@ -5,6 +5,7 @@ import numpy as np
 import argparse
 from torch_geometric.loader import DataLoader
 from torch.utils.data import WeightedRandomSampler
+from torch_scatter import scatter
 
 # Add the project root to the python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
@@ -22,6 +23,82 @@ class ConditionalJitter:
         if data.is_eq.item():  # Apply jitter only if it IS an equilibrium structure
             return self.jitter_transform(data)
         return data
+
+def calculate_adaptive_lambda(model, loader, device, num_batches=20):
+    """
+    Calculate an adaptive lambda by comparing the magnitudes of the energy and force losses
+    on a sample of the training data.
+    """
+    model.eval()
+    
+    total_energy_loss = 0.0
+    total_force_loss = 0.0
+    batches_processed = 0
+
+    mse_loss_fn = torch.nn.MSELoss()
+    huber_loss_fn = torch.nn.HuberLoss(delta=0.1)
+
+    for i, batch in enumerate(loader):
+        if i >= num_batches:
+            break
+        
+        batch = batch.to(device)
+        batch.pos.requires_grad_(True)
+
+        # --- Forward pass and force calculation with gradients enabled ---
+        pred_energy = model(batch)
+        pred_forces = compute_forces(pred_energy, batch.pos)
+
+        # --- Loss calculations can be done without tracking further gradients ---
+        with torch.no_grad():
+            pred_forces = pred_forces.detach()
+
+            # --- Energy Loss (Corrected) ---
+            atom2graph = batch.batch
+            n_graphs = pred_energy.size(0)
+            
+            ones = torch.ones_like(atom2graph, dtype=torch.float)
+            n_atoms_per_graph = scatter(ones, atom2graph, dim=0, dim_size=n_graphs)
+
+            isB = (batch.z == 5).float()
+            isC = (batch.z == 6).float()
+            nB_per_graph = scatter(isB, atom2graph, dim=0, dim_size=n_graphs)
+            nC_per_graph = scatter(isC, atom2graph, dim=0, dim_size=n_graphs)
+
+            E_base = nB_per_graph * E_ref_B + nC_per_graph * E_ref_C + n_atoms_per_graph * E0_per_atom
+            
+            y_res = batch.y_energy_res
+            n_atoms_safe = torch.clamp(n_atoms_per_graph, min=1)
+            pred_res = (pred_energy.detach() - E_base) / n_atoms_safe
+            energy_loss = mse_loss_fn(pred_res, y_res)
+
+            # --- Force Loss ---
+            force_loss = torch.tensor(0.0, device=device)
+            if hasattr(batch, 'y_forces'):
+                true_forces = batch.y_forces
+                if hasattr(batch, "batch"):
+                    eq_node_mask = batch.is_eq[batch.batch]
+                else:
+                    eq_node_mask = batch.is_eq.new_full((batch.pos.size(0),), bool(batch.is_eq.item()))
+                neq_node_mask = ~eq_node_mask
+
+                if neq_node_mask.any():
+                    force_loss += mse_loss_fn(pred_forces[neq_node_mask], true_forces[neq_node_mask])
+                if eq_node_mask.any():
+                    force_loss += huber_loss_fn(pred_forces[eq_node_mask], true_forces[eq_node_mask])
+
+            total_energy_loss += energy_loss.item()
+            total_force_loss += force_loss.item()
+            batches_processed += 1
+
+    model.train()
+
+    if total_force_loss < 1e-9:
+        return 1.0
+
+    adaptive_lambda = total_energy_loss / total_force_loss
+    return np.clip(adaptive_lambda, 0.1, 100.0)
+
 
 def main():
     parser = argparse.ArgumentParser(description="Train an E3NN force model.")
@@ -102,15 +179,8 @@ def main():
     train_loader = DataLoader(train_ds, batch_size=32, sampler=sampler, num_workers=os.cpu_count())
     val_loader = DataLoader(val_ds, batch_size=32, shuffle=False, num_workers=os.cpu_count())
     
-    # --- Progressive Force Weighting ---
-    all_natoms = torch.tensor([g.n_atoms for g in train_ds], dtype=torch.float)
-    avg_natoms = all_natoms.mean().item()
-    
-    lambda_forces_start = 0.1
-    lambda_forces_end = 1.0
-    lambda_warmup_epochs = args.lambda_warmup_epochs
-
-    print(f"λ_force schedule: start={lambda_forces_start:.3f}, end={lambda_forces_end:.3f}, warmup={lambda_warmup_epochs} epochs")
+    # --- Adaptive Force Weighting ---
+    print(f"Using adaptive force weighting.")
 
     # Training loop
     best_val_loss = float('inf')
@@ -118,10 +188,9 @@ def main():
     max_patience = 20
     
     for epoch in range(1, config["num_epochs"] + 1):
-        if epoch < lambda_warmup_epochs:
-            current_lambda_forces = lambda_forces_start + (lambda_forces_end - lambda_forces_start) * (epoch / lambda_warmup_epochs)
-        else:
-            current_lambda_forces = lambda_forces_end
+        # Calculate adaptive lambda at the start of each epoch
+        current_lambda_forces = calculate_adaptive_lambda(model, train_loader, device)
+        print(f"Epoch {epoch:03d} | Calculated adaptive λ_force = {current_lambda_forces:.3f}")
 
         train_loss, train_energy_loss, train_force_loss, _ = train_one_epoch(model, train_loader, optimizer, device, lambda_forces=current_lambda_forces)
         val_loss, val_energy_loss, val_force_loss = evaluate_model(model, val_loader, device)

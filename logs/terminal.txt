@@ -1089,3 +1089,31 @@ Processed 17/17
 [saved] parity_plots/forces_parity_ALL.png  |  MAE=1.081394 RMSE=1.377461 R²=-36.842218 (Metrics on unfiltered data)
 [saved] parity_plots/forces_parity_EQ.png  |  MAE=1.090255 RMSE=1.387283 R²=-118062.155919 (Metrics on unfiltered data)
 [saved] parity_plots/forces_parity_NEQ.png  |  MAE=0.882904 RMSE=1.135378 R²=-0.099052 (Metrics on unfiltered data)
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+Using adaptive force weighting.
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 268, in <module>
+    main()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 192, in main
+    current_lambda_forces = calculate_adaptive_lambda(model, train_loader, device)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 53, in calculate_adaptive_lambda
+    pred_forces = compute_forces(pred_energy, batch.pos)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/models/e3nn_gnn_model.py", line 440, in compute_forces
+    forces = -torch.autograd.grad(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/autograd/__init__.py", line 411, in grad
+    result = Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: element 0 of tensors does not require grad and does not have a grad_fn
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+Using adaptive force weighting.

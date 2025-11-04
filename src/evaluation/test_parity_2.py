@@ -53,76 +53,34 @@ def _r2_score(y_true: np.ndarray, y_pred: np.ndarray) -> float:
 
 
 # Original forces_parity_plot function
-# def forces_parity_plot(x_true: np.ndarray, y_pred: np.ndarray,
-#                        title: str,
-#                        out_png: str,
-#                        dpi: int = 200,
-#                        show: bool = False):
-#     """Generic parity plot helper. x_true and y_pred are 1D arrays (flattened forces)."""
-#     mae  = float(np.mean(np.abs(y_pred - x_true)))
-#     rmse = float(np.sqrt(np.mean((y_pred - x_true) ** 2)))
-#     r2   = float(_r2_score(x_true, y_pred))
-#
-#     lim = np.max(np.abs(np.concatenate([x_true, y_pred]))) * 1.05
-#     lim = max(lim, 1e-3)
-#
-#     plt.figure(figsize=(7, 6))
-#     plt.scatter(x_true, y_pred, s=6, alpha=0.5, edgecolors="none")
-#     plt.plot([-lim, lim], [-lim, lim], "k-", linewidth=1.5)
-#     plt.xlim([-lim, lim]); plt.ylim([-lim, lim])
-#     plt.xlabel("DFT Force (eV/Å)")
-#     plt.ylabel("NN Force (eV/Å)")
-#     plt.title(f"{title}\nMAE={mae:.4f}  RMSE={rmse:.4f}  R²={r2:.4f}")
-#     plt.tight_layout()
-#     os.makedirs(os.path.dirname(out_png) or ".", exist_ok=True)
-#     plt.savefig(out_png, dpi=dpi, bbox_inches="tight")
-#     if show:
-#         plt.show()
-#     plt.close()
-#     print(f"[saved] {out_png}  |  MAE={mae:.6f} RMSE={rmse:.6f} R²={r2:.6f}")
-
 def forces_parity_plot(x_true: np.ndarray, y_pred: np.ndarray,
                        title: str,
                        out_png: str,
                        dpi: int = 200,
                        show: bool = False):
-    """Generic parity plot helper with filtering for visualization."""
-
-    # Calculate metrics on the original, unfiltered data
+    """Generic parity plot helper. x_true and y_pred are 1D arrays (flattened forces)."""
     mae  = float(np.mean(np.abs(y_pred - x_true)))
     rmse = float(np.sqrt(np.mean((y_pred - x_true) ** 2)))
     r2   = float(_r2_score(x_true, y_pred))
 
-    # Filter out points very close to the axes for visualization purposes
-    zero_threshold = 1e-1 # A slightly larger threshold to effectively remove the lines
-    mask = (np.abs(x_true) > zero_threshold) & (np.abs(y_pred) > zero_threshold)
-    x_true_filtered = x_true[mask]
-    y_pred_filtered = y_pred[mask]
-
-    if len(x_true_filtered) > 0:
-        lim = np.max(np.abs(np.concatenate([x_true_filtered, y_pred_filtered]))) * 1.05
-    else:
-        # If all points are filtered, set a default limit based on original data
-        lim = np.max(np.abs(np.concatenate([x_true, y_pred]))) * 1.05
+    lim = np.max(np.abs(np.concatenate([x_true, y_pred]))) * 1.05
     lim = max(lim, 1e-3)
 
     plt.figure(figsize=(7, 6))
-    # Plot only the filtered data
-    plt.scatter(x_true_filtered, y_pred_filtered, s=6, alpha=0.5, edgecolors="none")
+    plt.scatter(x_true, y_pred, s=6, alpha=0.5, edgecolors="none")
     plt.plot([-lim, lim], [-lim, lim], "k-", linewidth=1.5)
     plt.xlim([-lim, lim]); plt.ylim([-lim, lim])
     plt.xlabel("DFT Force (eV/Å)")
     plt.ylabel("NN Force (eV/Å)")
-    # Display metrics calculated on the full, unfiltered dataset in the title
-    plt.title(f"{title}\nMAE={mae:.4f}  RMSE={rmse:.4f}  R²={r2:.4f} (Metrics on unfiltered data)")
+    plt.title(f"{title}\nMAE={mae:.4f}  RMSE={rmse:.4f}  R²={r2:.4f}")
     plt.tight_layout()
     os.makedirs(os.path.dirname(out_png) or ".", exist_ok=True)
     plt.savefig(out_png, dpi=dpi, bbox_inches="tight")
     if show:
         plt.show()
     plt.close()
-    # Print metrics for the unfiltered data
-    print(f"[saved] {out_png}  |  MAE={mae:.6f} RMSE={rmse:.6f} R²={r2:.6f} (Metrics on unfiltered data)")
+    print(f"[saved] {out_png}  |  MAE={mae:.6f} RMSE={rmse:.6f} R²={r2:.6f}")
+
 
 
 def build_model(device):

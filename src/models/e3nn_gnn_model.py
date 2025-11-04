@@ -468,13 +468,26 @@ def train_one_epoch(model, loader, optimizer, device, lambda_forces=1.0):
             pred_forces = compute_forces(pred_energy, batch.pos)
 
             # --- Residual-based energy loss (MSE) ---
-            z = batch.z
-            nB = (z == 5).sum().float()
-            nC = (z == 6).sum().float()
-            n_atoms = batch.n_atoms.float()
-            E_base = nB * E_ref_B + nC * E_ref_C + n_atoms * E0_per_atom
+            atom2graph = batch.batch
+            n_graphs = pred_energy.size(0)
+            
+            # Correctly count atoms per graph
+            ones = torch.ones_like(atom2graph, dtype=torch.float)
+            n_atoms_per_graph = scatter(ones, atom2graph, dim=0, dim_size=n_graphs)
+
+            # Correctly count B and C atoms per graph
+            isB = (batch.z == 5).float()
+            isC = (batch.z == 6).float()
+            nB_per_graph = scatter(isB, atom2graph, dim=0, dim_size=n_graphs)
+            nC_per_graph = scatter(isC, atom2graph, dim=0, dim_size=n_graphs)
+
+            # Calculate correct E_base per graph
+            E_base = nB_per_graph * E_ref_B + nC_per_graph * E_ref_C + n_atoms_per_graph * E0_per_atom
+            
             y_res = batch.y_energy_res
-            pred_res = (pred_energy - E_base) / n_atoms
+            # Ensure n_atoms_per_graph has no zeros to avoid division by zero
+            n_atoms_safe = torch.clamp(n_atoms_per_graph, min=1)
+            pred_res = (pred_energy - E_base) / n_atoms_safe
             energy_loss = mse_loss_fn(pred_res, y_res)
             
             # --- Hybrid Force Loss ---
