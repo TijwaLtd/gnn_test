@@ -1,6 +1,7 @@
 import os
 import sys
 import torch
+import torch.nn as nn
 import numpy as np
 import argparse
 from torch_geometric.loader import DataLoader
@@ -133,73 +134,70 @@ def train_one_epoch(model, loader, optimizer, device, lambda_forces=1.0, current
         pred_energy = model(batch)
         pred_forces = compute_forces(pred_energy, batch.pos)
 
-        # --- Loss calculations can be done without tracking further gradients ---
-        with torch.no_grad():
-            pred_forces = pred_forces.detach()
+        # --- Energy Loss (Corrected) ---
+        atom2graph = batch.batch
+        n_graphs = pred_energy.size(0)
+        
+        ones = torch.ones_like(atom2graph, dtype=torch.float, device=device)
+        n_atoms_per_graph = scatter(ones, atom2graph, dim=0, dim_size=n_graphs)
 
-            # --- Energy Loss (Corrected) ---
-            atom2graph = batch.batch
-            n_graphs = pred_energy.size(0)
-            
-            ones = torch.ones_like(atom2graph, dtype=torch.float)
-            n_atoms_per_graph = scatter(ones, atom2graph, dim=0, dim_size=n_graphs)
+        isB = (batch.z == 5).float()
+        isC = (batch.z == 6).float()
+        nB_per_graph = scatter(isB, atom2graph, dim=0, dim_size=n_graphs)
+        nC_per_graph = scatter(isC, atom2graph, dim=0, dim_size=n_graphs)
 
-            isB = (batch.z == 5).float()
-            isC = (batch.z == 6).float()
-            nB_per_graph = scatter(isB, atom2graph, dim=0, dim_size=n_graphs)
-            nC_per_graph = scatter(isC, atom2graph, dim=0, dim_size=n_graphs)
+        E_base = nB_per_graph * E_ref_B + nC_per_graph * E_ref_C + n_atoms_per_graph * E0_per_atom
+        
+        y_res = batch.y_energy_res
+        n_atoms_safe = torch.clamp(n_atoms_per_graph, min=1)
+        pred_res = (pred_energy - E_base) / n_atoms_safe
+        energy_loss = mse_loss_fn(pred_res, y_res)
 
-            E_base = nB_per_graph * E_ref_B + nC_per_graph * E_ref_C + n_atoms_per_graph * E0_per_atom
-            
-            y_res = batch.y_energy_res
-            n_atoms_safe = torch.clamp(n_atoms_per_graph, min=1)
-            pred_res = (pred_energy.detach() - E_base) / n_atoms_safe
-            energy_loss = mse_loss_fn(pred_res, y_res)
+        # --- Force Loss ---
+        force_loss = torch.tensor(0.0, device=device)
+        if hasattr(batch, 'y_forces'):
+            true_forces = batch.y_forces
+            if hasattr(batch, "batch"):
+                eq_node_mask = batch.is_eq[batch.batch]
+            else:
+                eq_node_mask = batch.is_eq.new_full((batch.pos.size(0),), bool(batch.is_eq.item()))
+            neq_node_mask = ~eq_node_mask
 
-            # --- Force Loss ---
-            force_loss = torch.tensor(0.0, device=device)
-            if hasattr(batch, 'y_forces'):
-                true_forces = batch.y_forces
-                if hasattr(batch, "batch"):
-                    eq_node_mask = batch.is_eq[batch.batch]
-                else:
-                    eq_node_mask = batch.is_eq.new_full((batch.pos.size(0),), bool(batch.is_eq.item()))
-                neq_node_mask = ~eq_node_mask
+            if neq_node_mask.any():
+                force_loss += mse_loss_fn(pred_forces[neq_node_mask], true_forces[neq_node_mask])
+            if eq_node_mask.any():
+                force_loss += huber_loss_fn(pred_forces[eq_node_mask], true_forces[eq_node_mask])
 
-                if neq_node_mask.any():
-                    force_loss += mse_loss_fn(pred_forces[neq_node_mask], true_forces[neq_node_mask])
-                if eq_node_mask.any():
-                    force_loss += huber_loss_fn(pred_forces[eq_node_mask], true_forces[eq_node_mask])
+        # Add L2 regularization
+        l2_reg = torch.tensor(0., device=device)
+        for param in model.parameters():
+            if param.requires_grad:
+                l2_reg += torch.norm(param, 2)
+        
+        # Adaptive loss weighting based on epoch
+        progress = current_epoch / max_epochs
+        force_loss_weight = lambda_forces * min(1.0, progress * 2)  # Ramp up force loss
+        
+        # Total batch loss with L2 regularization
+        total_batch_loss = energy_loss + force_loss_weight * force_loss + l2_lambda * l2_reg
 
-            # Add L2 regularization
-            for param in model.parameters():
-                if param.requires_grad:
-                    l2_reg += torch.norm(param, 2)
-            
-            # Adaptive loss weighting based on epoch
-            progress = current_epoch / max_epochs
-            force_loss_weight = lambda_forces * min(1.0, progress * 2)  # Ramp up force loss
-            
-            # Total batch loss with L2 regularization
-            total_batch_loss = energy_loss + force_loss_weight * force_loss + l2_lambda * l2_reg
+        # Backprop and optimization with gradient clipping
+        optimizer.zero_grad()
+        total_batch_loss.backward()
+        
+        # Gradient clipping with adaptive max_norm
+        max_grad_norm = 1.0  # Base max norm
+        torch.nn.utils.clip_grad_norm_(
+            model.parameters(), 
+            max_norm=max_grad_norm,
+            norm_type=2.0
+        )
+        
+        optimizer.step()
 
-            # Backprop and optimization with gradient clipping
-            optimizer.zero_grad()
-            total_batch_loss.backward()
-            
-            # Gradient clipping with adaptive max_norm
-            max_grad_norm = 1.0  # Base max norm
-            torch.nn.utils.clip_grad_norm_(
-                model.parameters(), 
-                max_norm=max_grad_norm,
-                norm_type=2.0
-            )
-            
-            optimizer.step()
-
-            total_loss += total_batch_loss.item()
-            energy_loss_total += energy_loss.item()
-            force_loss_total += force_loss.item()
+        total_loss += total_batch_loss.item()
+        energy_loss_total += energy_loss.item()
+        force_loss_total += force_loss.item()
 
     return total_loss / len(loader), energy_loss_total / len(loader), force_loss_total / len(loader), None
 

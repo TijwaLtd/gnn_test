@@ -1089,3 +1089,29 @@ Processed 17/17
 [saved] parity_plots/forces_parity_ALL.png  |  MAE=1.081394 RMSE=1.377461 R²=-36.842218 (Metrics on unfiltered data)
 [saved] parity_plots/forces_parity_EQ.png  |  MAE=1.090255 RMSE=1.387283 R²=-118062.155919 (Metrics on unfiltered data)
 [saved] parity_plots/forces_parity_NEQ.png  |  MAE=0.882904 RMSE=1.135378 R²=-0.099052 (Metrics on unfiltered data)
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 13,720
+Trainable parameters: 13,720
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+Using adaptive force weighting.
+Epoch 001 | Force weight = 1.000, LR = 3.80e-05
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 401, in <module>
+    main()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 321, in main
+    train_loss, train_energy_loss, train_force_loss, _ = train_one_epoch(
+                                                         ^^^^^^^^^^^^^^^^
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 189, in train_one_epoch
+    total_batch_loss.backward()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/_tensor.py", line 522, in backward
+    torch.autograd.backward(
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/venv/lib/python3.11/site-packages/torch/autograd/__init__.py", line 266, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: element 0 of tensors does not require grad and does not have a grad_fn
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 13,720
+Trainable parameters: 13,720
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+Using adaptive force weighting.
