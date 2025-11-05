@@ -1,0 +1,391 @@
+Using device: cuda
+Found 2201 test samples in C:\Users\labadmin\Documents\GNN imp\src\data\index_neq.csv
+Loading weights from C:\Users\labadmin\Documents\GNN imp\models\best_model.pth …
+Traceback (most recent call last):
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_2.py", line 300, in <module>
+    evaluate_all(
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_2.py", line 202, in evaluate_all
+    pred_E = model(batch_data)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "c:\Users\labadmin\Documents\GNN imp\src\models\e3nn_gnn_model.py", line 407, in forward
+    node_features = layer(node_features, edge_index, sh_features, rbf_features)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "c:\Users\labadmin\Documents\GNN imp\src\models\e3nn_gnn_model.py", line 288, in forward
+    messages = self.tp(node_features[source], edge_attr, rbf_weights)  # [num_edges, tp_irreps]
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\e3nn\o3\_tensor_product\_tensor_product.py", line 554, in forward
+    return self._compiled_main_left_right(x, y, real_weight)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+RuntimeError: The following operation failed in the TorchScript interpreter.
+Traceback of TorchScript (most recent call last):
+  File "<eval_with_key>.14", line 155, in forward
+    getitem_29 = reshape_2[(slice(None, None, None), slice(3808, 3936, None))]
+    reshape_48 = getitem_29.reshape((-1, 8, 1, 16));  getitem_29 = None
+    einsum_34 = torch.functional.einsum('edb,eca->ecdab', reshape_10, reshape_5);  reshape_5 = None
+                ~~~~~~~~~~~~~~~~~~~~~~~ <--- HERE
+    _w3j_2_3_1 = self._w3j_2_3_1
+    tensordot_7 = torch.functional.tensordot(einsum_34, _w3j_2_3_1, ([3, 4], [0, 1]), out = None);  _w3j_2_3_1 = None
+RuntimeError: CUDA out of memory. Tried to allocate 664.00 MiB. GPU 0 has a total capacity of 16.00 GiB of which 225.00 MiB is free. Of the allocated memory 14.38 GiB is allocated by PyTorch, and 286.50 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+Using device: cuda
+Found 100 test samples in C:\Users\labadmin\Documents\GNN imp\src\data\index_eq.csv
+Loading weights from C:\Users\labadmin\Documents\GNN imp\models\best_model.pth …
+Traceback (most recent call last):
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_2.py", line 300, in <module>
+    evaluate_all(
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_2.py", line 203, in evaluate_all
+    pred_F = compute_forces(pred_E, batch_data.pos)
+  File "c:\Users\labadmin\Documents\GNN imp\src\models\e3nn_gnn_model.py", line 440, in compute_forces
+    forces = -torch.autograd.grad(
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\autograd\__init__.py", line 411, in grad
+    result = Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.85 GiB. GPU 0 has a total capacity of 16.00 GiB of which 1.23 GiB is free. Of the allocated memory 11.59 GiB is allocated by PyTorch, and 2.05 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Using device: cuda
+Found 100 test samples in C:\Users\labadmin\Documents\GNN imp\src\data\index_eq.csv
+Loading weights from C:\Users\labadmin\Documents\GNN imp\models\best_model.pth …
+Traceback (most recent call last):
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_2.py", line 300, in <module>
+    evaluate_all(
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_2.py", line 203, in evaluate_all
+    pred_F = compute_forces(pred_E, batch_data.pos)
+  File "c:\Users\labadmin\Documents\GNN imp\src\models\e3nn_gnn_model.py", line 440, in compute_forces
+    forces = -torch.autograd.grad(
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\autograd\__init__.py", line 411, in grad
+    result = Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.03 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 2.11 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Using device: cuda
+Found 100 test samples in C:\Users\labadmin\Documents\GNN imp\src\data\index_eq.csv
+Loading weights from C:\Users\labadmin\Documents\GNN imp\models\best_model.pth …
+Processed 20/100
+Processed 40/100
+Processed 60/100
+Processed 80/100
+Processed 100/100
+[saved] parity_plots\forces_parity_ALL.png  |  MAE=1.545808 RMSE=2.184662 R²=-14.509356 (Metrics on unfiltered data)
+Using device: cuda
+Found 100 test samples in C:\Users\labadmin\Documents\GNN imp\src\data\index_eq.csv
+Loading weights from C:\Users\labadmin\Documents\GNN imp\models\best_model.pth …
+Processed 20/100
+Processed 40/100
+Processed 60/100
+Processed 80/100
+Processed 100/100
+[saved] parity_plots\forces_parity_new.png  |  MAE=1.545809 RMSE=2.184662 R²=-14.509359 (Metrics on unfiltered data)
+Using device: cuda
+Training for 200 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 80 EQ structures (weight=0.0125), 1761 NEQ structures (weight=0.0006)
+λ_force schedule: start=0.100, end=1.000, warmup=100 epochs
+Error in batch 0: CUDA out of memory. Tried to allocate 4.27 GiB. GPU 0 has a total capacity of 16.00 GiB of which 2.25 GiB is free. Of the allocated memory 12.12 GiB is allocated by PyTorch, and 516.92 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 1: CUDA out of memory. Tried to allocate 4.28 GiB. GPU 0 has a total capacity of 16.00 GiB of which 2.24 GiB is free. Of the allocated memory 12.14 GiB is allocated by PyTorch, and 508.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 2: CUDA out of memory. Tried to allocate 4.59 GiB. GPU 0 has a total capacity of 16.00 GiB of which 1.29 GiB is free. Of the allocated memory 13.05 GiB is allocated by PyTorch, and 553.49 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 3: The following operation failed in the TorchScript interpreter.
+Traceback of TorchScript (most recent call last):
+  File "<eval_with_key>.23", line 155, in forward
+    getitem_29 = reshape_2[(slice(None, None, None), slice(3808, 3936, None))]
+    reshape_48 = getitem_29.reshape((-1, 8, 1, 16));  getitem_29 = None
+    einsum_34 = torch.functional.einsum('edb,eca->ecdab', reshape_10, reshape_5);  reshape_5 = None
+                ~~~~~~~~~~~~~~~~~~~~~~~ <--- HERE
+    _w3j_2_3_1 = self._w3j_2_3_1
+    tensordot_7 = torch.functional.tensordot(einsum_34, _w3j_2_3_1, ([3, 4], [0, 1]), out = None);  _w3j_2_3_1 = None
+RuntimeError: CUDA out of memory. Tried to allocate 354.00 MiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 14.69 GiB is allocated by PyTorch, and 350.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+Error in batch 4: CUDA out of memory. Tried to allocate 4.32 GiB. GPU 0 has a total capacity of 16.00 GiB of which 293.00 MiB is free. Of the allocated memory 12.27 GiB is allocated by PyTorch, and 2.32 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 5: CUDA out of memory. Tried to allocate 4.02 GiB. GPU 0 has a total capacity of 16.00 GiB of which 571.00 MiB is free. Of the allocated memory 11.43 GiB is allocated by PyTorch, and 2.90 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 6: CUDA out of memory. Tried to allocate 4.10 GiB. GPU 0 has a total capacity of 16.00 GiB of which 723.00 MiB is free. Of the allocated memory 11.63 GiB is allocated by PyTorch, and 2.54 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 7: CUDA out of memory. Tried to allocate 3.16 GiB. GPU 0 has a total capacity of 16.00 GiB of which 1.03 GiB is free. Of the allocated memory 8.98 GiB is allocated by PyTorch, and 4.86 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 8: CUDA out of memory. Tried to allocate 4.05 GiB. GPU 0 has a total capacity of 16.00 GiB of which 1.03 GiB is free. Of the allocated memory 11.49 GiB is allocated by PyTorch, and 2.36 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 9: CUDA out of memory. Tried to allocate 4.30 GiB. GPU 0 has a total capacity of 16.00 GiB of which 1.25 GiB is free. Of the allocated memory 12.22 GiB is allocated by PyTorch, and 1.41 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 10: CUDA out of memory. Tried to allocate 4.75 GiB. GPU 0 has a total capacity of 16.00 GiB of which 551.00 MiB is free. Of the allocated memory 13.47 GiB is allocated by PyTorch, and 892.14 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 11: CUDA out of memory. Tried to allocate 4.95 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 14.04 GiB is allocated by PyTorch, and 979.22 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 12: CUDA out of memory. Tried to allocate 3.86 GiB. GPU 0 has a total capacity of 16.00 GiB of which 473.00 MiB is free. Of the allocated memory 10.96 GiB is allocated by PyTorch, and 3.46 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 13: CUDA out of memory. Tried to allocate 5.03 GiB. GPU 0 has a total capacity of 16.00 GiB of which 1.89 GiB is free. Of the allocated memory 7.41 GiB is allocated by PyTorch, and 5.58 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 14: CUDA out of memory. Tried to allocate 6.35 GiB. GPU 0 has a total capacity of 16.00 GiB of which 4.72 GiB is free. Of the allocated memory 9.35 GiB is allocated by PyTorch, and 824.85 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 15: CUDA out of memory. Tried to allocate 4.32 GiB. GPU 0 has a total capacity of 16.00 GiB of which 403.00 MiB is free. Of the allocated memory 12.26 GiB is allocated by PyTorch, and 2.23 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 16: CUDA out of memory. Tried to allocate 4.54 GiB. GPU 0 has a total capacity of 16.00 GiB of which 1.13 GiB is free. Of the allocated memory 12.89 GiB is allocated by PyTorch, and 882.37 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 17: CUDA out of memory. Tried to allocate 4.56 GiB. GPU 0 has a total capacity of 16.00 GiB of which 1.04 GiB is free. Of the allocated memory 12.95 GiB is allocated by PyTorch, and 905.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 18: CUDA out of memory. Tried to allocate 3.32 GiB. GPU 0 has a total capacity of 16.00 GiB of which 1.02 GiB is free. Of the allocated memory 9.42 GiB is allocated by PyTorch, and 4.44 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 19: CUDA out of memory. Tried to allocate 3.61 GiB. GPU 0 has a total capacity of 16.00 GiB of which 1.02 GiB is free. Of the allocated memory 10.25 GiB is allocated by PyTorch, and 3.61 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 20: CUDA out of memory. Tried to allocate 4.95 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 14.04 GiB is allocated by PyTorch, and 883.38 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 21: CUDA out of memory. Tried to allocate 4.67 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 13.26 GiB is allocated by PyTorch, and 1.64 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 22: The following operation failed in the TorchScript interpreter.
+Traceback of TorchScript (most recent call last):
+  File "<eval_with_key>.23", line 232, in forward
+    add_19 = add_18 + reshape_54;  add_18 = reshape_54 = None
+    add_20 = add_19 + reshape_60;  add_19 = reshape_60 = None
+    cat = torch.cat([add_4, add_9, add_15, add_20], dim = 1);  add_4 = add_9 = add_15 = add_20 = None
+          ~~~~~~~~~ <--- HERE
+    reshape_65 = cat.reshape(add_1);  cat = add_1 = None
+    return reshape_65
+RuntimeError: CUDA out of memory. Tried to allocate 178.00 MiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 14.11 GiB is allocated by PyTorch, and 1.07 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+Error in batch 23: CUDA out of memory. Tried to allocate 4.09 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 11.62 GiB is allocated by PyTorch, and 3.59 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 24: CUDA out of memory. Tried to allocate 4.65 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 13.19 GiB is allocated by PyTorch, and 1.99 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 25: CUDA out of memory. Tried to allocate 4.24 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 12.05 GiB is allocated by PyTorch, and 3.13 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 26: CUDA out of memory. Tried to allocate 4.54 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 12.90 GiB is allocated by PyTorch, and 2.28 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 27: CUDA out of memory. Tried to allocate 3.78 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 10.72 GiB is allocated by PyTorch, and 4.27 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 28: CUDA out of memory. Tried to allocate 4.82 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 13.69 GiB is allocated by PyTorch, and 1.28 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 29: CUDA out of memory. Tried to allocate 4.09 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 11.60 GiB is allocated by PyTorch, and 3.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 30: CUDA out of memory. Tried to allocate 3.75 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 10.65 GiB is allocated by PyTorch, and 4.34 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 31: CUDA out of memory. Tried to allocate 4.22 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 11.97 GiB is allocated by PyTorch, and 3.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 32: CUDA out of memory. Tried to allocate 3.67 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 10.41 GiB is allocated by PyTorch, and 4.58 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 33: CUDA out of memory. Tried to allocate 3.62 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 10.28 GiB is allocated by PyTorch, and 4.72 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 34: CUDA out of memory. Tried to allocate 4.30 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 12.22 GiB is allocated by PyTorch, and 2.75 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 35: CUDA out of memory. Tried to allocate 4.75 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 13.49 GiB is allocated by PyTorch, and 1.48 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 36: CUDA out of memory. Tried to allocate 3.81 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 10.83 GiB is allocated by PyTorch, and 4.12 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 37: CUDA out of memory. Tried to allocate 4.77 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 13.55 GiB is allocated by PyTorch, and 1.38 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 38: CUDA out of memory. Tried to allocate 3.85 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 10.93 GiB is allocated by PyTorch, and 4.03 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 39: CUDA out of memory. Tried to allocate 3.25 GiB. GPU 0 has a total capacity of 16.00 GiB of which 109.00 MiB is free. Of the allocated memory 9.22 GiB is allocated by PyTorch, and 5.55 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 40: CUDA out of memory. Tried to allocate 3.39 GiB. GPU 0 has a total capacity of 16.00 GiB of which 109.00 MiB is free. Of the allocated memory 9.63 GiB is allocated by PyTorch, and 5.15 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 41: CUDA out of memory. Tried to allocate 4.50 GiB. GPU 0 has a total capacity of 16.00 GiB of which 131.00 MiB is free. Of the allocated memory 12.77 GiB is allocated by PyTorch, and 1.98 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 42: The following operation failed in the TorchScript interpreter.
+Traceback of TorchScript (most recent call last):
+  File "<eval_with_key>.23", line 165, in forward
+    _w3j_2_3_3 = self._w3j_2_3_3
+    einsum_36 = torch.functional.einsum('fcdab,fcde->fabe', einsum_34, reshape_50);  einsum_34 = reshape_50 = None
+    tensordot_8 = torch.functional.tensordot(einsum_36, _w3j_2_3_3, ([1, 2], [0, 1]), out = None);  einsum_36 = _w3j_2_3_3 = None
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~ <--- HERE
+    mul_61 = tensordot_8 * 0.31180478223116176;  tensordot_8 = None
+    reshape_51 = mul_61.reshape(getitem_5, 28);  mul_61 = None
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\functional.py", line 1208, in tensordot
+
+    if out is None:
+        return _VF.tensordot(a, b, dims_a, dims_b)  # type: ignore[attr-defined]
+               ~~~~~~~~~~~~~ <--- HERE
+    else:
+        return _VF.tensordot(a, b, dims_a, dims_b, out=out)  # type: ignore[attr-defined]
+RuntimeError: CUDA out of memory. Tried to allocate 172.00 MiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 14.73 GiB is allocated by PyTorch, and 380.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+Error in batch 43: CUDA out of memory. Tried to allocate 3.33 GiB. GPU 0 has a total capacity of 16.00 GiB of which 0 bytes is free. Of the allocated memory 9.46 GiB is allocated by PyTorch, and 5.67 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 44: CUDA out of memory. Tried to allocate 5.34 GiB. GPU 0 has a total capacity of 16.00 GiB of which 4.83 GiB is free. Of the allocated memory 7.86 GiB is allocated by PyTorch, and 2.18 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Error in batch 45: CUDA out of memory. Tried to allocate 4.49 GiB. GPU 0 has a total capacity of 16.00 GiB of which 349.00 MiB is free. Of the allocated memory 12.75 GiB is allocated by PyTorch, and 1.79 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)Using device: cuda
+Training for 200 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 80 EQ structures (weight=0.0125), 1761 NEQ structures (weight=0.0006)
+λ_force schedule: start=0.100, end=1.000, warmup=100 epochs
+Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x000001EB61E134C0>
+Traceback (most recent call last):
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\utils\data\dataloader.py", line 1479, in __del__
+    self._shutdown_workers()
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\utils\data\dataloader.py", line 1443, in _shutdown_workers
+    w.join(timeout=_utils.MP_STATUS_CHECK_INTERVAL)
+  File "C:\Program Files\Python39\lib\multiprocessing\process.py", line 149, in join
+    res = self._popen.wait(timeout)
+  File "C:\Program Files\Python39\lib\multiprocessing\popen_spawn_win32.py", line 108, in wait
+    res = _winapi.WaitForSingleObject(int(self._handle), msecs)
+KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "c:\Users\labadmin\Documents\GNN imp\src\training\train.py", line 199, in <module>
+    main()
+  File "c:\Users\labadmin\Documents\GNN imp\src\training\train.py", line 127, in main
+    val_loss, val_energy_loss, val_force_loss = evaluate_model(model, val_loader, device)
+  File "c:\Users\labadmin\Documents\GNN imp\src\models\e3nn_gnn_model.py", line 552, in evaluate_model
+    pred_energy = model(batch).view(-1)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "c:\Users\labadmin\Documents\GNN imp\src\models\e3nn_gnn_model.py", line 407, in forward
+    node_features = layer(node_features, edge_index, sh_features, rbf_features)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "c:\Users\labadmin\Documents\GNN imp\src\models\e3nn_gnn_model.py", line 288, in forward
+    messages = self.tp(node_features[source], edge_attr, rbf_weights)  # [num_edges, tp_irreps]
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\e3nn\o3\_tensor_product\_tensor_product.py", line 554, in forward
+    return self._compiled_main_left_right(x, y, real_weight)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+KeyboardInterrupt
+Using device: cuda
+Training for 200 epochs.
+Total parameters: 13,720
+Trainable parameters: 13,720
+Sampler: 80 EQ structures (weight=0.0125), 1761 NEQ structures (weight=0.0006)
+λ_force schedule: start=0.100, end=1.000, warmup=100 epochs
+
+Eval ▶ Energy RMSE: 0.7443 | Force RMSE: 1.9161
+Train Metrics 001 | λ_F=0.109 | Train: total=3.2763 E=3.0323 F=2.2383 | Val: total=4.2255 E=0.5540 F=3.6715
+[ckpt] New best model found! Saved to models/best_model.pth (val_loss: 4.225520)
+
+Eval ▶ Energy RMSE: 0.5885 | Force RMSE: 2.3135
+Train Metrics 002 | λ_F=0.118 | Train: total=1.0912 E=0.8141 F=2.3482 | Val: total=5.6985 E=0.3464 F=5.3521
+
+Eval ▶ Energy RMSE: 1.3370 | Force RMSE: 2.8097
+Train Metrics 003 | λ_F=0.127 | Train: total=2.0196 E=0.8249 F=9.4071 | Val: total=9.6817 E=1.7875 F=7.8943
+
+Eval ▶ Energy RMSE: 1.1416 | Force RMSE: 2.2102
+Train Metrics 004 | λ_F=0.136 | Train: total=1.1051 E=0.4888 F=4.5313 | Val: total=6.1883 E=1.3033 F=4.8850
+
+Eval ▶ Energy RMSE: 0.9081 | Force RMSE: 3.0462
+Train Metrics 005 | λ_F=0.145 | Train: total=3.9545 E=0.6918 F=22.5011 | Val: total=10.1043 E=0.8247 F=9.2796
+
+Eval ▶ Energy RMSE: 1.0747 | Force RMSE: 2.4537
+Train Metrics 006 | λ_F=0.154 | Train: total=1.4273 E=0.5295 F=5.8303 | Val: total=7.1754 E=1.1549 F=6.0205
+
+Eval ▶ Energy RMSE: 0.9332 | Force RMSE: 2.7522
+Train Metrics 007 | λ_F=0.163 | Train: total=2.7735 E=0.7375 F=12.4909 | Val: total=8.4453 E=0.8709 F=7.5743
+
+Eval ▶ Energy RMSE: 0.9174 | Force RMSE: 2.4016
+Train Metrics 008 | λ_F=0.172 | Train: total=4.3129 E=0.6736 F=21.1589 | Val: total=6.6091 E=0.8417 F=5.7675
+
+Eval ▶ Energy RMSE: 1.4125 | Force RMSE: 3.8020
+Train Metrics 009 | λ_F=0.181 | Train: total=2.0378 E=0.9618 F=5.9450 | Val: total=16.4508 E=1.9952 F=14.4556
+
+Eval ▶ Energy RMSE: 1.3552 | Force RMSE: 4.7665
+Train Metrics 010 | λ_F=0.190 | Train: total=2.7584 E=1.0344 F=9.0735 | Val: total=24.5566 E=1.8367 F=22.7200
+[ckpt] Saved latest checkpoint at epoch 10
+
+Eval ▶ Energy RMSE: 1.4377 | Force RMSE: 2.2469
+Train Metrics 011 | λ_F=0.199 | Train: total=2.0018 E=0.7103 F=6.4900 | Val: total=7.1156 E=2.0669 F=5.0487
+
+Eval ▶ Energy RMSE: 1.8787 | Force RMSE: 2.7221
+Train Metrics 012 | λ_F=0.208 | Train: total=1.8327 E=1.0813 F=3.6125 | Val: total=10.9395 E=3.5297 F=7.4098
+
+Eval ▶ Energy RMSE: 1.8434 | Force RMSE: 2.5609
+Train Metrics 013 | λ_F=0.217 | Train: total=3.2019 E=1.5787 F=7.4800 | Val: total=9.9560 E=3.3980 F=6.5580
+
+Eval ▶ Energy RMSE: 2.4441 | Force RMSE: 2.6207
+Train Metrics 014 | λ_F=0.226 | Train: total=3.1914 E=2.4143 F=3.4386 | Val: total=12.8418 E=5.9735 F=6.8683
+
+Eval ▶ Energy RMSE: 3.6960 | Force RMSE: 2.1908
+Train Metrics 015 | λ_F=0.235 | Train: total=4.8871 E=4.0361 F=3.6216 | Val: total=18.4598 E=13.6601 F=4.7997
+
+Eval ▶ Energy RMSE: 4.3602 | Force RMSE: 3.6308
+Train Metrics 016 | λ_F=0.244 | Train: total=7.6635 E=6.1498 F=6.2037 | Val: total=32.1939 E=19.0114 F=13.1824
+
+Eval ▶ Energy RMSE: 5.3998 | Force RMSE: 2.8737
+Train Metrics 017 | λ_F=0.253 | Train: total=17.1080 E=11.9090 F=20.5492 | Val: total=37.4158 E=29.1574 F=8.2583
+
+Eval ▶ Energy RMSE: 5.2866 | Force RMSE: 3.0753
+Train Metrics 018 | λ_F=0.262 | Train: total=25.0228 E=16.8840 F=31.0638 | Val: total=37.4055 E=27.9481 F=9.4574
+
+Eval ▶ Energy RMSE: 6.2751 | Force RMSE: 4.6380
+Train Metrics 019 | λ_F=0.271 | Train: total=66.8509 E=21.8401 F=166.0915 | Val: total=60.8883 E=39.3768 F=21.5115
+
+Eval ▶ Energy RMSE: 7.9887 | Force RMSE: 4.8888
+Train Metrics 020 | λ_F=0.280 | Train: total=21.5973 E=19.7272 F=6.6789 | Val: total=87.7189 E=63.8190 F=23.8999
+[ckpt] Saved latest checkpoint at epoch 20
+
+Eval ▶ Energy RMSE: 7.5033 | Force RMSE: 3.4768
+Train Metrics 021 | λ_F=0.289 | Train: total=32.8350 E=29.2276 F=12.4825 | Val: total=68.3873 E=56.2993 F=12.0881
+Early stopping at epoch 21
+Using device: cuda
+Found 100 test samples in C:\Users\labadmin\Documents\GNN imp\src\data\index_eq.csv
+Loading weights from C:\Users\labadmin\Documents\GNN imp\src\models\latest_checkpoint.pt …
+Traceback (most recent call last):
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_2.py", line 300, in <module>
+    evaluate_all(
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_2.py", line 186, in evaluate_all
+    _ckpt = load_weights(model, model_path, device=device, strict=strict_load)
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_2.py", line 159, in load_weights
+    load_result = model.load_state_dict(state, strict=strict)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 2153, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for E3NNForceModel:
+	Missing key(s) in state_dict: "layers.0.tp._compiled_main_left_right._w3j_1_1_2", "layers.0.tp._compiled_main_left_right._w3j_1_2_1", "layers.0.tp._compiled_main_left_right._w3j_1_2_3", "layers.0.tp._compiled_main_left_right._w3j_1_3_2", "layers.0.tp._compiled_main_left_right._w3j_2_1_1", "layers.0.tp._compiled_main_left_right._w3j_2_1_3", "layers.0.tp._compiled_main_left_right._w3j_2_2_2", "layers.0.tp._compiled_main_left_right._w3j_2_3_1", "layers.0.tp._compiled_main_left_right._w3j_2_3_3", "layers.0.tp._compiled_main_left_right._w3j_3_1_2", "layers.0.tp._compiled_main_left_right._w3j_3_2_1", "layers.0.tp._compiled_main_left_right._w3j_3_2_3", "layers.0.tp._compiled_main_left_right._w3j_3_3_2", "layers.1.tp._compiled_main_left_right._w3j_1_1_2", "layers.1.tp._compiled_main_left_right._w3j_1_2_1", "layers.1.tp._compiled_main_left_right._w3j_1_2_3", "layers.1.tp._compiled_main_left_right._w3j_1_3_2", "layers.1.tp._compiled_main_left_right._w3j_2_1_1", "layers.1.tp._compiled_main_left_right._w3j_2_1_3", "layers.1.tp._compiled_main_left_right._w3j_2_2_2", "layers.1.tp._compiled_main_left_right._w3j_2_3_1", "layers.1.tp._compiled_main_left_right._w3j_2_3_3", "layers.1.tp._compiled_main_left_right._w3j_3_1_2", "layers.1.tp._compiled_main_left_right._w3j_3_2_1", "layers.1.tp._compiled_main_left_right._w3j_3_2_3", "layers.1.tp._compiled_main_left_right._w3j_3_3_2", "layers.2.tp.weight", "layers.2.tp.output_mask", "layers.2.tp._compiled_main_left_right._w3j_1_1_2", "layers.2.tp._compiled_main_left_right._w3j_1_2_1", "layers.2.tp._compiled_main_left_right._w3j_1_2_3", "layers.2.tp._compiled_main_left_right._w3j_1_3_2", "layers.2.tp._compiled_main_left_right._w3j_2_1_1", "layers.2.tp._compiled_main_left_right._w3j_2_1_3", "layers.2.tp._compiled_main_left_right._w3j_2_2_2", "layers.2.tp._compiled_main_left_right._w3j_2_3_1", "layers.2.tp._compiled_main_left_right._w3j_2_3_3", "layers.2.tp._compiled_main_left_right._w3j_3_1_2", "layers.2.tp._compiled_main_left_right._w3j_3_2_1", "layers.2.tp._compiled_main_left_right._w3j_3_2_3", "layers.2.tp._compiled_main_left_right._w3j_3_3_2", "layers.2.rbf_mlp.0.weight", "layers.2.rbf_mlp.0.bias", "layers.2.rbf_mlp.2.weight", "layers.2.rbf_mlp.2.bias", "gates.1.norm.tp.weight", "gates.1.norm.tp.output_mask", "gates.1.scalar_multiplier.weight", "gates.1.scalar_multiplier.output_mask". 
+	size mismatch for rbf_expansion.centers: copying a param with shape torch.Size([16]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for rbf_expansion.widths: copying a param with shape torch.Size([16]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for input_projection.weight: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([2048]).
+	size mismatch for input_projection.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for layers.0.tp.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for layers.0.rbf_mlp.0.weight: copying a param with shape torch.Size([16, 16]) from checkpoint, the shape in current model is torch.Size([64, 64]).
+	size mismatch for layers.0.rbf_mlp.0.bias: copying a param with shape torch.Size([16]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for layers.0.rbf_mlp.2.weight: copying a param with shape torch.Size([144, 16]) from checkpoint, the shape in current model is torch.Size([4256, 64]).
+	size mismatch for layers.0.rbf_mlp.2.bias: copying a param with shape torch.Size([144]) from checkpoint, the shape in current model is torch.Size([4256]).
+	size mismatch for layers.1.tp.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for layers.1.rbf_mlp.0.weight: copying a param with shape torch.Size([16, 16]) from checkpoint, the shape in current model is torch.Size([64, 64]).
+	size mismatch for layers.1.rbf_mlp.0.bias: copying a param with shape torch.Size([16]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for layers.1.rbf_mlp.2.weight: copying a param with shape torch.Size([144, 16]) from checkpoint, the shape in current model is torch.Size([4256, 64]).
+	size mismatch for layers.1.rbf_mlp.2.bias: copying a param with shape torch.Size([144]) from checkpoint, the shape in current model is torch.Size([4256]).
+	size mismatch for gates.0.norm.tp.output_mask: copying a param with shape torch.Size([12]) from checkpoint, the shape in current model is torch.Size([60]).
+	size mismatch for gates.0.scalar_multiplier.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for energy_head.0.weight: copying a param with shape torch.Size([80]) from checkpoint, the shape in current model is torch.Size([1360]).
+	size mismatch for energy_head.0.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for energy_head.1.norm.tp.output_mask: copying a param with shape torch.Size([12]) from checkpoint, the shape in current model is torch.Size([60]).
+	size mismatch for energy_head.1.scalar_multiplier.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for energy_head.2.weight: copying a param with shape torch.Size([8]) from checkpoint, the shape in current model is torch.Size([32]).
+Using device: cuda
+Found 100 test samples in C:\Users\labadmin\Documents\GNN imp\src\data\index_eq.csv
+Loading weights from C:\Users\labadmin\Documents\GNN imp\src\models\latest_checkpoint.pt …
+Processed 20/100
+Processed 40/100
+Processed 60/100
+Processed 80/100
+Processed 100/100
+[saved] parity_plots\forces_parity_new.png  |  MAE=17.572086 RMSE=40.056984 R²=-5213.129755 (Metrics on unfiltered data)
+Using device: cuda
+Found 100 test samples in C:\Users\labadmin\Documents\GNN imp\src\data\index_eq.csv
+Loading weights from C:\Users\labadmin\Documents\GNN imp\src\models\latest_checkpoint.pt …
+Traceback (most recent call last):
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_21.py", line 199, in <module>
+    evaluate_all(
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_21.py", line 129, in evaluate_all
+    _ckpt = load_weights(model, model_path, device=device, strict=strict_load)
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_21.py", line 105, in load_weights
+    load_result = model.load_state_dict(state, strict=strict)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 2153, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for E3NNForceModel:
+	Missing key(s) in state_dict: "layers.0.tp._compiled_main_left_right._w3j_1_1_2", "layers.0.tp._compiled_main_left_right._w3j_1_2_1", "layers.0.tp._compiled_main_left_right._w3j_1_2_3", "layers.0.tp._compiled_main_left_right._w3j_1_3_2", "layers.0.tp._compiled_main_left_right._w3j_2_1_1", "layers.0.tp._compiled_main_left_right._w3j_2_1_3", "layers.0.tp._compiled_main_left_right._w3j_2_2_2", "layers.0.tp._compiled_main_left_right._w3j_2_3_1", "layers.0.tp._compiled_main_left_right._w3j_2_3_3", "layers.0.tp._compiled_main_left_right._w3j_3_1_2", "layers.0.tp._compiled_main_left_right._w3j_3_2_1", "layers.0.tp._compiled_main_left_right._w3j_3_2_3", "layers.0.tp._compiled_main_left_right._w3j_3_3_2", "layers.1.tp._compiled_main_left_right._w3j_1_1_2", "layers.1.tp._compiled_main_left_right._w3j_1_2_1", "layers.1.tp._compiled_main_left_right._w3j_1_2_3", "layers.1.tp._compiled_main_left_right._w3j_1_3_2", "layers.1.tp._compiled_main_left_right._w3j_2_1_1", "layers.1.tp._compiled_main_left_right._w3j_2_1_3", "layers.1.tp._compiled_main_left_right._w3j_2_2_2", "layers.1.tp._compiled_main_left_right._w3j_2_3_1", "layers.1.tp._compiled_main_left_right._w3j_2_3_3", "layers.1.tp._compiled_main_left_right._w3j_3_1_2", "layers.1.tp._compiled_main_left_right._w3j_3_2_1", "layers.1.tp._compiled_main_left_right._w3j_3_2_3", "layers.1.tp._compiled_main_left_right._w3j_3_3_2", "layers.2.tp.weight", "layers.2.tp.output_mask", "layers.2.tp._compiled_main_left_right._w3j_1_1_2", "layers.2.tp._compiled_main_left_right._w3j_1_2_1", "layers.2.tp._compiled_main_left_right._w3j_1_2_3", "layers.2.tp._compiled_main_left_right._w3j_1_3_2", "layers.2.tp._compiled_main_left_right._w3j_2_1_1", "layers.2.tp._compiled_main_left_right._w3j_2_1_3", "layers.2.tp._compiled_main_left_right._w3j_2_2_2", "layers.2.tp._compiled_main_left_right._w3j_2_3_1", "layers.2.tp._compiled_main_left_right._w3j_2_3_3", "layers.2.tp._compiled_main_left_right._w3j_3_1_2", "layers.2.tp._compiled_main_left_right._w3j_3_2_1", "layers.2.tp._compiled_main_left_right._w3j_3_2_3", "layers.2.tp._compiled_main_left_right._w3j_3_3_2", "layers.2.rbf_mlp.0.weight", "layers.2.rbf_mlp.0.bias", "layers.2.rbf_mlp.2.weight", "layers.2.rbf_mlp.2.bias", "gates.1.norm.tp.weight", "gates.1.norm.tp.output_mask", "gates.1.scalar_multiplier.weight", "gates.1.scalar_multiplier.output_mask". 
+	size mismatch for rbf_expansion.centers: copying a param with shape torch.Size([16]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for rbf_expansion.widths: copying a param with shape torch.Size([16]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for input_projection.weight: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([2048]).
+	size mismatch for input_projection.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for layers.0.tp.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for layers.0.rbf_mlp.0.weight: copying a param with shape torch.Size([16, 16]) from checkpoint, the shape in current model is torch.Size([64, 64]).
+	size mismatch for layers.0.rbf_mlp.0.bias: copying a param with shape torch.Size([16]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for layers.0.rbf_mlp.2.weight: copying a param with shape torch.Size([144, 16]) from checkpoint, the shape in current model is torch.Size([4256, 64]).
+	size mismatch for layers.0.rbf_mlp.2.bias: copying a param with shape torch.Size([144]) from checkpoint, the shape in current model is torch.Size([4256]).
+	size mismatch for layers.1.tp.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for layers.1.rbf_mlp.0.weight: copying a param with shape torch.Size([16, 16]) from checkpoint, the shape in current model is torch.Size([64, 64]).
+	size mismatch for layers.1.rbf_mlp.0.bias: copying a param with shape torch.Size([16]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for layers.1.rbf_mlp.2.weight: copying a param with shape torch.Size([144, 16]) from checkpoint, the shape in current model is torch.Size([4256, 64]).
+	size mismatch for layers.1.rbf_mlp.2.bias: copying a param with shape torch.Size([144]) from checkpoint, the shape in current model is torch.Size([4256]).
+	size mismatch for gates.0.norm.tp.output_mask: copying a param with shape torch.Size([12]) from checkpoint, the shape in current model is torch.Size([60]).
+	size mismatch for gates.0.scalar_multiplier.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for energy_head.0.weight: copying a param with shape torch.Size([80]) from checkpoint, the shape in current model is torch.Size([1360]).
+	size mismatch for energy_head.0.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for energy_head.1.norm.tp.output_mask: copying a param with shape torch.Size([12]) from checkpoint, the shape in current model is torch.Size([60]).
+	size mismatch for energy_head.1.scalar_multiplier.output_mask: copying a param with shape torch.Size([20]) from checkpoint, the shape in current model is torch.Size([148]).
+	size mismatch for energy_head.2.weight: copying a param with shape torch.Size([8]) from checkpoint, the shape in current model is torch.Size([32]).
+Using device: cuda
+Found 100 test samples in C:\Users\labadmin\Documents\GNN imp\src\data\index_eq.csv
+Loading weights from C:\Users\labadmin\Documents\GNN imp\src\models\latest_checkpoint.pt …
+Traceback (most recent call last):
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_21.py", line 199, in <module>
+    evaluate_all(
+  File "c:\Users\labadmin\Documents\GNN imp\src\evaluation\test_parity_21.py", line 148, in evaluate_all
+    pred_E = model(data)                      # scalar or [batch], your model should return energy
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch\nn\modules\module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "c:\Users\labadmin\Documents\GNN imp\src\models\e3nn_gnn_model.py", line 372, in forward
+    num_graphs = data.num_graphs
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch_geometric\data\data.py", line 559, in __getattr__
+    return getattr(self._store, key)
+  File "C:\Users\labadmin\AppData\Roaming\Python\Python39\site-packages\torch_geometric\data\storage.py", line 96, in __getattr__
+    raise AttributeError(
+AttributeError: 'GlobalStorage' object has no attribute 'num_graphs'

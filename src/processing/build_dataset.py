@@ -11,8 +11,8 @@ from processing.prepare_splits import create_splits
 
 def main():
     # Define data paths
-    neq_data_path = "data/DFT_DATA"
-    eq_data_path = "data/Data_eq"
+    neq_data_path = "D:\Sara\All_DFT_Data"
+    eq_data_path = "D:\Sara\All_DFT_Data\Test_Data"
     
     # Define output paths for index files and splits
     index_neq_csv = "data/index_neq.csv"
