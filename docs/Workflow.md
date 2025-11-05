@@ -150,14 +150,14 @@ Training on a GPU in Google Colab can significantly speed up the process. Hereâ€
 
     ```python
     # For a public repository
-    !git clone -b gnn_latest https://github.com/your-username/your-repository-name.git
-    %cd your-repository-name
+    !git clone -b gnn_latest https://github.com/MuhammadZain2005/GNN_private.git
+    %cd GNN_private
 
     # For a private repository
     # Replace <YOUR_PAT> with your Personal Access Token
     # Replace <YOUR_USERNAME> and <YOUR_REPO_NAME>
-    !git clone -b gnn_latest https://<YOUR_PAT>@github.com/<YOUR_USERNAME>/<YOUR_REPO_NAME>.git
-    %cd <YOUR_REPO_NAME>
+    !git clone -b gnn_latest https://<YOUR_PAT>@github.com/MuhammadZain2005/GNN_private.git
+    %cd GNN_private
     ```
 
 4.  **Upload Your Data:**

@@ -1117,3 +1117,41 @@ Total parameters: 853,520
 Trainable parameters: 853,520
 Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
 Using adaptive force weighting.
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+Using adaptive force weighting.
+Epoch 001 | Calculated adaptive λ_force = 19.558
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+Using adaptive force weighting.
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+Using adaptive force weighting.
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+Using adaptive force weighting.
+Traceback (most recent call last):
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 394, in <module>
+    main()
+  File "/Users/mac/Documents/Projects/fiver/GNN_private_latest/src/training/train.py", line 300, in main
+    param_group['lr'] = lr_scale * param_group['initial_lr']
+                                   ~~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'initial_lr'
+Using device: cpu
+Training for 10 epochs.
+Total parameters: 853,520
+Trainable parameters: 853,520
+Sampler: 56 EQ structures (weight=0.0179), 11 NEQ structures (weight=0.0909)
+Using adaptive force weighting.

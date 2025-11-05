@@ -100,6 +100,110 @@ def calculate_adaptive_lambda(model, loader, device, num_batches=20):
     return np.clip(adaptive_lambda, 0.1, 100.0)
 
 
+def train_one_epoch(model, loader, optimizer, device, lambda_forces=1.0, current_epoch=1, max_epochs=200):
+    """Training loop with hybrid force loss and adaptive weighting.
+    
+    Args:
+        model: The GNN model
+        loader: DataLoader for training data
+        optimizer: Optimizer instance
+        device: Device to run on
+        lambda_forces: Weight for force loss component
+        current_epoch: Current epoch number (for scheduling)
+        max_epochs: Total number of epochs (for scheduling)
+    """
+    model.train()
+    total_loss = 0.0
+    energy_loss_total = 0.0
+    force_loss_total = 0.0
+    
+    # Define loss functions with different behaviors for equilibrium and non-equilibrium
+    mse_loss_fn = nn.MSELoss()
+    huber_loss_fn = nn.HuberLoss(delta=0.1)  # More robust to outliers
+    
+    # Add L2 regularization
+    l2_lambda = 1e-5  # L2 regularization strength
+    l2_reg = torch.tensor(0., device=device)
+    
+    for batch in loader:
+        batch = batch.to(device)
+        batch.pos.requires_grad_(True)
+
+        # --- Forward pass and force calculation with gradients enabled ---
+        pred_energy = model(batch)
+        pred_forces = compute_forces(pred_energy, batch.pos)
+
+        # --- Loss calculations can be done without tracking further gradients ---
+        with torch.no_grad():
+            pred_forces = pred_forces.detach()
+
+            # --- Energy Loss (Corrected) ---
+            atom2graph = batch.batch
+            n_graphs = pred_energy.size(0)
+            
+            ones = torch.ones_like(atom2graph, dtype=torch.float)
+            n_atoms_per_graph = scatter(ones, atom2graph, dim=0, dim_size=n_graphs)
+
+            isB = (batch.z == 5).float()
+            isC = (batch.z == 6).float()
+            nB_per_graph = scatter(isB, atom2graph, dim=0, dim_size=n_graphs)
+            nC_per_graph = scatter(isC, atom2graph, dim=0, dim_size=n_graphs)
+
+            E_base = nB_per_graph * E_ref_B + nC_per_graph * E_ref_C + n_atoms_per_graph * E0_per_atom
+            
+            y_res = batch.y_energy_res
+            n_atoms_safe = torch.clamp(n_atoms_per_graph, min=1)
+            pred_res = (pred_energy.detach() - E_base) / n_atoms_safe
+            energy_loss = mse_loss_fn(pred_res, y_res)
+
+            # --- Force Loss ---
+            force_loss = torch.tensor(0.0, device=device)
+            if hasattr(batch, 'y_forces'):
+                true_forces = batch.y_forces
+                if hasattr(batch, "batch"):
+                    eq_node_mask = batch.is_eq[batch.batch]
+                else:
+                    eq_node_mask = batch.is_eq.new_full((batch.pos.size(0),), bool(batch.is_eq.item()))
+                neq_node_mask = ~eq_node_mask
+
+                if neq_node_mask.any():
+                    force_loss += mse_loss_fn(pred_forces[neq_node_mask], true_forces[neq_node_mask])
+                if eq_node_mask.any():
+                    force_loss += huber_loss_fn(pred_forces[eq_node_mask], true_forces[eq_node_mask])
+
+            # Add L2 regularization
+            for param in model.parameters():
+                if param.requires_grad:
+                    l2_reg += torch.norm(param, 2)
+            
+            # Adaptive loss weighting based on epoch
+            progress = current_epoch / max_epochs
+            force_loss_weight = lambda_forces * min(1.0, progress * 2)  # Ramp up force loss
+            
+            # Total batch loss with L2 regularization
+            total_batch_loss = energy_loss + force_loss_weight * force_loss + l2_lambda * l2_reg
+
+            # Backprop and optimization with gradient clipping
+            optimizer.zero_grad()
+            total_batch_loss.backward()
+            
+            # Gradient clipping with adaptive max_norm
+            max_grad_norm = 1.0  # Base max norm
+            torch.nn.utils.clip_grad_norm_(
+                model.parameters(), 
+                max_norm=max_grad_norm,
+                norm_type=2.0
+            )
+            
+            optimizer.step()
+
+            total_loss += total_batch_loss.item()
+            energy_loss_total += energy_loss.item()
+            force_loss_total += force_loss.item()
+
+    return total_loss / len(loader), energy_loss_total / len(loader), force_loss_total / len(loader), None
+
+
 def main():
     parser = argparse.ArgumentParser(description="Train an E3NN force model.")
     parser.add_argument("--epochs", type=int, default=200, help="Number of training epochs.")
@@ -134,7 +238,13 @@ def main():
     print(f"Trainable parameters: {trainable_params:,}")
     
     # Optimizer and loss
-    optimizer = torch.optim.AdamW(model.parameters(), lr=3.8e-4, weight_decay=2.4e-4)
+    initial_lr = 3.8e-4
+    optimizer = torch.optim.AdamW(model.parameters(), lr=initial_lr, weight_decay=2.4e-4)
+    
+    # Store initial_lr in each parameter group for warmup
+    for param_group in optimizer.param_groups:
+        param_group['initial_lr'] = initial_lr
+        
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
         optimizer, mode='min', factor=0.8, patience=8
     )
@@ -142,8 +252,6 @@ def main():
     # Set the root directory to your DFT_DATA folder
     ROOT = "data/DFT_DATA"
     
-    
-
     # --- Data Augmentation for Training Data ---
     jitter_transform = Jitter(displacement_magnitude=0.02)
     conditional_jitter_transform = ConditionalJitter(jitter_transform)
@@ -182,17 +290,41 @@ def main():
     # --- Adaptive Force Weighting ---
     print(f"Using adaptive force weighting.")
 
-    # Training loop
+    # Training loop with improved learning rate scheduling and loss weighting
     best_val_loss = float('inf')
     patience_counter = 0
-    max_patience = 20
+    max_patience = 30  # Increased patience
+    
+    # Learning rate warmup
+    warmup_epochs = 10
     
     for epoch in range(1, config["num_epochs"] + 1):
-        # Calculate adaptive lambda at the start of each epoch
+        # Learning rate warmup
+        if epoch <= warmup_epochs:
+            lr_scale = min(1., float(epoch) / warmup_epochs)
+            for param_group in optimizer.param_groups:
+                param_group['lr'] = lr_scale * param_group['initial_lr']
+        
+        # Calculate adaptive lambda with force weighting
         current_lambda_forces = calculate_adaptive_lambda(model, train_loader, device)
-        print(f"Epoch {epoch:03d} | Calculated adaptive λ_force = {current_lambda_forces:.3f}")
+        
+        # Gradually increase force weight over first few epochs
+        if epoch < args.lambda_warmup_epochs:
+            force_weight = current_lambda_forces * (epoch / args.lambda_warmup_epochs)
+        else:
+            force_weight = current_lambda_forces
+            
+        print(f"Epoch {epoch:03d} | Force weight = {force_weight:.3f}, LR = {optimizer.param_groups[0]['lr']:.2e}")
 
-        train_loss, train_energy_loss, train_force_loss, _ = train_one_epoch(model, train_loader, optimizer, device, lambda_forces=current_lambda_forces)
+        # Train for one epoch
+        train_loss, train_energy_loss, train_force_loss, _ = train_one_epoch(
+            model, train_loader, optimizer, device, 
+            lambda_forces=force_weight,
+            current_epoch=epoch,
+            max_epochs=config["num_epochs"]
+        )
+        
+        # Evaluate on validation set
         val_loss, val_energy_loss, val_force_loss = evaluate_model(model, val_loader, device)
 
         print(f"Train Metrics {epoch:03d} | λ_F={current_lambda_forces:.3f} | "

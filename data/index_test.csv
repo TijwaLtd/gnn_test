@@ -1,0 +1,18 @@
+root_dir,graph_path,is_eq,n_B,n_C,n_atoms,composition,tag
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/DFT_DATA,30 atoms/S_116406/graphs.pt,0,23,7,30,B23C7,S_116406
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/DFT_DATA,30 atoms/S_146902/graphs.pt,0,23,7,30,B23C7,S_146902
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test43/graphs.pt,1,107,13,120,B107C13,Test43
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test62/graphs.pt,1,105,15,120,B105C15,Test62
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test23/graphs.pt,1,97,23,120,B97C23,Test23
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test54/graphs.pt,1,109,11,120,B109C11,Test54
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test50/graphs.pt,1,111,9,120,B111C9,Test50
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test4/graphs.pt,1,99,21,120,B99C21,Test4
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/DFT_DATA,15 atoms/S_23543/graphs.pt,0,11,4,15,B11C4,S_23543
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test60/graphs.pt,1,97,23,120,B97C23,Test60
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test30/graphs.pt,1,101,19,120,B101C19,Test30
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test11/graphs.pt,1,99,21,120,B99C21,Test11
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test57/graphs.pt,1,109,11,120,B109C11,Test57
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test70/graphs.pt,1,107,13,120,B107C13,Test70
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test13/graphs.pt,1,103,17,120,B103C17,Test13
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test29/graphs.pt,1,101,19,120,B101C19,Test29
+/Users/mac/Documents/Projects/fiver/GNN_private_latest/data/Data_eq,Test8/graphs.pt,1,99,21,120,B99C21,Test8
